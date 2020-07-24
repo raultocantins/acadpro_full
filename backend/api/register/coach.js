@@ -25,6 +25,8 @@ module.exports = app => {
             existsOrError(user.gymId,'Erro interno')
             existsOrError(user.number, 'Telefone não informado!')
             existsOrError(user.salario, 'Salário não informado!')
+            existsOrError(user.birth, 'Data de nascimento não informada!')
+            existsOrError(user.url,'Selecione uma imagem!')
 
 
 

@@ -13,6 +13,7 @@ module.exports = app => {
 
         if (req.params.id) user.id = req.params.id
         if (req.user.id) user.gymId = req.user.id
+        if (user) user.createAt = new Date().toLocaleString()
 
         try {
             existsOrError(user.name, 'Nome não foi informado!')
@@ -21,6 +22,12 @@ module.exports = app => {
             equalsOrError(user.password, user.confirmPassword, 'Senhas não conferem!')
             existsOrError(user.number, 'Telefone não informado!')
             existsOrError(user.days, 'Mensalidade não informada!')
+            existsOrError(user.height, 'Altura não informada!')
+            existsOrError(user.weight, 'Peso não informado!')
+            existsOrError(user.fat, 'Percentual de gordura não informado!')
+            existsOrError(user.pressure, 'Pressão não informada!')
+            existsOrError(user.birth, 'Data de nascimento não informada!')
+            existsOrError(user.url, 'Imagem não selecionada!')
 
 
 
@@ -36,9 +43,10 @@ module.exports = app => {
 
         delete user.confirmPassword
         if (user.id) {
+            delete user.deletedAt
             app.db('users')
                 .update(user)
-                .where({ id: user.id })
+                .where({ id: user.id ,gymId:user.gymId })
                 .then(_ => { res.status(204).send('Atualização concluida!') })
                 .catch(err => { res.status(500).send(err) })
         } else if (user.gymId) {
@@ -46,7 +54,7 @@ module.exports = app => {
                 .insert(user)
                 .then(_ => res.status(204).send('Inserção concluida!'))
                 .catch(err => { res.status(500).send(err) })
-        } else { res.send('tudo ok') }
+        } else { res.status(500).send('Erro ao tentar cadastrar aluno!') }
 
     }
     const get_users = (req, res) => {
@@ -58,11 +66,11 @@ module.exports = app => {
             .then(users => {
                 res.json(users)
             })
-            .catch(err => res.status(500).send(err))
+            .catch(_ => res.status(400).send('Nenhum usuário cadastrado!'))
     }
     const remove = async (req, res) => {
         try {
-            const rowsDelete = await app.db('users').update({ deletedAt: new Date() }).where({ id: req.params.id })
+            const rowsDelete = await app.db('users').update({ deletedAt: new Date() }).where({ id: req.params.id,gymId:req.user.id })
             existsOrError(rowsDelete, "Usuário não foi encontrado!")
             res.status(204).send()
         } catch (e) {
