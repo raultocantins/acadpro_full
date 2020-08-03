@@ -76,18 +76,18 @@ export default class DetailsRedesSociais extends Component {
 <div style={styles.div} className="container">
 <Box boxShadow={3}>
                 <Grid container sm={12} alignItems='center' alignContent='between' justify='center'>
-                    <Grid item='true' sm={12}>
+                    <Grid item={true} sm={12}>
                         <Paper elevation={10}>
                             <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                 Redes Sociais
                         </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item='true' sm={6}>
+                    <Grid item={true} sm={6}>
                         <TextField
 
                             label="Facebook"
-                            floatingLabelText="Facebook" style={styles.textfield} defaultValue={facebook}
+                            floatinglabeltext="Facebook" style={styles.textfield} defaultValue={facebook}
                             onChange={this.props.handleChange('facebook')}
                             id="outlined-read-only-input"
                             helperText="Insira seu facebook"
@@ -95,10 +95,10 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item='true' sm={6}>
+                    <Grid item={true} sm={6}>
                         <TextField
                             label="Instagram"
-                            floatingLabelText="Instagram" style={styles.textfield} defaultValue={instagram}
+                            floatinglabeltext="Instagram" style={styles.textfield} defaultValue={instagram}
                             onChange={this.props.handleChange('instagram')}
                             id="outlined-read-only-input"
                             helperText="Insira seu instagram"
@@ -107,11 +107,11 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item='true' sm={6}>
+                    <Grid item={true} sm={6}>
                         <TextField
                             required
                             label="Telefone"
-                            floatingLabelText="Telefone" style={styles.textfield} defaultValue={number}
+                            floatinglabeltext="Telefone" style={styles.textfield} defaultValue={number}
                             onChange={this.props.handleChange('number')}
                             id="outlined-read-only-input"
                             variant="outlined"
@@ -120,11 +120,11 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item='true' sm={6}>
+                    <Grid item={true} sm={6}>
                         <TextField
                             required
                             label="Cep"
-                            floatingLabelText="Cep" style={styles.textfield} defaultValue={cep}
+                            floatinglabeltext="Cep" style={styles.textfield} defaultValue={cep}
                             onChange={this.props.handleChange('cep')}
                             id="outlined-read-only-input"
                             variant="outlined"
@@ -133,19 +133,19 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item='true' sm={6}>
-                        <Button item='true' sm={6} variant="contained" color="primary" onClick={this.continue}
+                    <Grid item={true} sm={6}>
+                        <Button item={true} sm={6} variant="contained" color="primary" onClick={this.continue}
                             style={styles.buttonNext}
                         >
                             Próximo
                         </Button>
-                        <Button item='true' sm={6} variant="contained" color="default" onClick={this.prev}
+                        <Button item={true} sm={6} variant="contained" color="default" onClick={this.prev}
                             style={styles.buttonPrev}
                         >Voltar
                         </Button>
 
                     </Grid>
-                    <Grid item='true' xs={12}>
+                    <Grid item={true} xs={12}>
                         <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar}/>
 
                     </Grid>

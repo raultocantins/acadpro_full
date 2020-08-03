@@ -82,8 +82,8 @@ export default class DetailsPersonal extends Component {
 
 
 
-                        <Grid container sm={12} alignItems='center' alignContent='between' justify='center' >
-                            <Grid item='true' sm={12}>
+                        <Grid container alignItems='center' alignContent='space-between' justify='center' >
+                            <Grid item={true} sm={12}>
                                 <Paper elevation={10}>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                         Detalhes Pessoais
@@ -91,7 +91,7 @@ export default class DetailsPersonal extends Component {
                                 </Paper>
                             </Grid>
 
-                            <Grid item='true' sm={6}>
+                            <Grid item={true} sm={6}>
                                 <TextField
                                     required
                                     id="outlined-read-only-input"
@@ -100,15 +100,15 @@ export default class DetailsPersonal extends Component {
                                     onChange={this.props.handleChange('name')}
                                     variant="outlined"
                                     style={styles.textfield}
-                                    floatingLabelText="Nome"
+                                    floatinglabeltext="Nome"
                                     error={this.state.nameError}
                                     helperText={this.state.nameError ? this.state.nameError : "Insira seu nome completo"}
                                 />
                             </Grid>
-                            <Grid item='true' sm={6}>
+                            <Grid item={true} sm={6}>
                                 <TextField
                                     required
-                                    floatingLabelText="Email"
+                                    floatinglabeltext="Email"
                                     style={styles.textfield}
                                     id="outlined-read-only-input"
                                     label="Email"
@@ -121,12 +121,12 @@ export default class DetailsPersonal extends Component {
                                 />
 
                             </Grid>
-                            <Grid item='true' sm={6}>
+                            <Grid item={true} sm={6}>
 
                                 <TextField
                                     required
                                     label="Senha"
-                                    floatingLabelText="Senha" style={styles.textfield} defaultValue={password}
+                                    floatinglabeltext="Senha" style={styles.textfield} defaultValue={password}
                                     onChange={this.props.handleChange('password')} type="password"
                                     id="outlined-read-only-input"
                                     helperText={this.state.passwordError ? this.state.passwordError : "Insira uma senha de 8 digitos"}
@@ -135,11 +135,11 @@ export default class DetailsPersonal extends Component {
                                 />
 
                             </Grid>
-                            <Grid item='true' sm={6}>
+                            <Grid item={true} sm={6}>
                                 <TextField
                                     required
                                     label="Confirmação de senha"
-                                    floatingLabelText="Confirmação de senha" style={styles.textfield} defaultValue={confirmPassword}
+                                    floatinglabeltext="Confirmação de senha" style={styles.textfield} defaultValue={confirmPassword}
                                     onChange={this.props.handleChange('confirmPassword')} type="password"
                                     id="outlined-read-only-input"
                                     helperText={this.state.confirmPasswordError ? this.state.confirmPasswordError : "Confirme sua senha de 8 digitos"}
@@ -148,8 +148,8 @@ export default class DetailsPersonal extends Component {
                                 />
 
                             </Grid>
-                            <Grid item='true' sm={6} >
-                                <Button item='true' sm={6} variant="contained" color="primary" onClick={this.continue}
+                            <Grid item={true} sm={6} >
+                                <Button item={true} sm={6} variant="contained" color="primary" onClick={this.continue}
                                     style={styles.button}
                                     
                                 >
@@ -158,7 +158,7 @@ export default class DetailsPersonal extends Component {
 
                             </Grid>
 
-                            <Grid item='true' xs={12}>
+                            <Grid item={true} xs={12}>
                                 <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar}/>
 
                             </Grid>

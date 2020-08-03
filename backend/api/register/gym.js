@@ -6,7 +6,7 @@ module.exports = app => {
         return bcrypt.hashSync(password, salt)
     }
     const save = async (req, res) => {
-        const user = { ...req.body }
+        const user = { ...req.body }      
 
         if (req.params.id) user.id = req.params.id
         if (user) user.createAt = new Date().toLocaleString()
@@ -17,10 +17,8 @@ module.exports = app => {
             equalsOrError(user.password, user.confirmPassword, 'Senhas não conferem!')
             existsOrError(user.number, 'Telefone não informado!')
             existsOrError(user.cep, 'Cep não informado!')
-            existsOrError(user.kit, "Informe o tipo de Pacote!")
-            existsOrError(user.facebook, "Informe o facebook!")
-            existsOrError(user.url, 'Selecione uma imagem!')
-            existsOrError(user.instagram,'Insira o instagram!')
+            existsOrError(user.kit, "Informe o tipo de Pacote!")           
+        
 
             const userFromDB = await app.db('gym').where({ email: user.email }).first()
             if (!user.id) {

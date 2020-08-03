@@ -1,5 +1,6 @@
 import { Component } from 'react'
-import baseUrl from '../../config/baseUrl'
+import Alert from '@material-ui/lab/Alert';
+import Collapse from '@material-ui/core/Collapse';
 import Axios from 'axios'
 import './DetailsPersonal.css'
 import React from 'react';
@@ -11,30 +12,32 @@ import { List, ListItem, ListItemText } from '@material-ui/core/';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Box from '@material-ui/core/Box';
 export default class Verif extends Component {
-   
- register(e) {
-    e.preventDefault()
-    
-    /* Axios.post(`${baseUrl}/signup`,data)
-    .then(res=>{
-        this.props.nextStep()
-    })
-    .catch(err=>{
-        alert(err)
-    })*/
+    state = {
+        message: "",
+    }
+    constructor(props) {
+        super(props);
+        this.register = this.register.bind(this);
+    }
 
-}
+    register(e) {
+        e.preventDefault()
+        const { name, email, facebook, number, instagram, kit, cep, url, password, confirmPassword } = this.props.values
+        const user = { name, email, facebook, number, instagram, kit, cep, url, password, confirmPassword }
+        Axios.post("http://localhost:4000/signup", user)
+            .then(res => {
+                this.props.nextStep()
+            })
+            .catch(err => {                
+                this.setState({ message: err.response.data })
+            })
+    }
+
 
     prev = e => {
         e.preventDefault()
         this.props.prevStep()
-
     }
-
-
-
-
-
 
     render() {
         const styles = {
@@ -53,7 +56,8 @@ export default class Verif extends Component {
             },
             progressBar: {
                 height: "40px"
-            }
+            },
+            toasted: { position: "absolute", height: "100px", width: '300px' }
         }
 
         const { name, email, facebook, number, instagram, kit, cep, url, step } = this.props.values
@@ -65,6 +69,11 @@ export default class Verif extends Component {
 
             <React.Fragment>
                 <div style={styles.div} className="container">
+                    <Collapse in={this.state.message}>
+                        <Alert color='error'>
+                           {this.state.message}
+                          </Alert>
+                    </Collapse>
                     <Box boxShadow={3}>
 
                         <Grid container sm={12} alignItems='center' alignContent='between' justify='center'>
