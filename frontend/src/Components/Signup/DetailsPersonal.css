@@ -1,0 +1,12 @@
+@media (max-width:500px){
+    .container{
+        width: 100%!important;
+         height: 100vh!important;
+         margin: 0px!important;
+                    
+       
+    }.grid{
+        width: 100%!important;
+        height: 100vh!important;
+    }
+}

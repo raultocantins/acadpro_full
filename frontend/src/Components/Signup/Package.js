@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
+
 export default class Package extends Component {
 
     continue = e => {
@@ -47,6 +48,9 @@ export default class Package extends Component {
             },
             progressBar: {
                 height: "40px"
+            },
+            grid:{
+                display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
             }
         }
 
@@ -61,7 +65,7 @@ export default class Package extends Component {
                 <div style={styles.div} className="container">
                     <Box boxShadow={3}>
 
-                        <Grid container sm={12} alignItems='center' alignContent='between' justify='center' >
+                        <Grid container sm={12} alignItems='center' alignContent='center' justify='center' className="grid">
                             <Grid item='true' sm={12}>
                                 <Paper elevation={10}>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
@@ -69,7 +73,7 @@ export default class Package extends Component {
                         </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item='true' sm={6}>
+                            <Grid item='true' sm={6} style={styles.grid}>
                                 <TextField
                                     id="standard-select-currency"
                                     select
@@ -92,7 +96,7 @@ export default class Package extends Component {
                                 </TextField>
 
                             </Grid>
-                            <Grid item='true' sm={6}>
+                            <Grid item='true' sm={6} style={styles.grid}>
                                 <input
                                     style={{ display: 'none' }}
                                     id="contained-button-file"
@@ -106,7 +110,7 @@ export default class Package extends Component {
                                 </label>
 
                             </Grid>
-                            <Grid item='true' sm={6}>
+                            <Grid item='true' sm={6} style={styles.grid}>
                                 <Button variant="contained" color="primary" onClick={this.continue}
                                     style={styles.buttonNext}
                                 >
@@ -118,7 +122,7 @@ export default class Package extends Component {
                         </Button>
 
                             </Grid>
-                            <Grid item='true' xs={12}>
+                            <Grid item='true' md={12}>
                                 <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
 
                             </Grid>

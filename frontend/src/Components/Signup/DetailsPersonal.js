@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
-
 export default class DetailsPersonal extends Component {
     state = {
         nameError: "",
@@ -38,15 +37,12 @@ export default class DetailsPersonal extends Component {
             this.props.nextStep()
 
         }
-       
+
     }
-
-
-
     render() {
         const styles = {
             div: {
-                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%", display: "flex", flexDirection: "row"
+                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%",display:"flex"
             },
             textfield: {
                 marginTop: '40px'
@@ -57,41 +53,28 @@ export default class DetailsPersonal extends Component {
             typography: {
                 padding: '10px'
             },
-            progressBar:{
-               height:"40px"
+            progressBar: {
+                height: "40px"
+            },
+            grid:{
+                display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
             }
-
         }
-
         const { name, email, password, confirmPassword, step } = this.props.values
         const { progressBar } = this.props
-
-
-
-
         return (
-
             <React.Fragment >
-
-
-
-
-
-                <div style={styles.div} className="container">
-                    <Box boxShadow={3}>
-
-
-
-                        <Grid container alignItems='center' alignContent='space-between' justify='center' >
+                <div style={styles.div} className="container" >
+                    <Box boxShadow={3} >
+                        <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
                             <Grid item={true} sm={12}>
                                 <Paper elevation={10}>
-                                    <Typography variant='h4' align='center' style={styles.typography} color='primary'>
+                                    <Typography variant='h4' align='center' style={styles.typography} color='primary' >
                                         Detalhes Pessoais
                         </Typography>
                                 </Paper>
                             </Grid>
-
-                            <Grid item={true} sm={6}>
+                            <Grid item={true} sm={6} style={styles.grid}>
                                 <TextField
                                     required
                                     id="outlined-read-only-input"
@@ -105,7 +88,7 @@ export default class DetailsPersonal extends Component {
                                     helperText={this.state.nameError ? this.state.nameError : "Insira seu nome completo"}
                                 />
                             </Grid>
-                            <Grid item={true} sm={6}>
+                            <Grid item={true} sm={6} style={styles.grid}>
                                 <TextField
                                     required
                                     floatinglabeltext="Email"
@@ -121,7 +104,7 @@ export default class DetailsPersonal extends Component {
                                 />
 
                             </Grid>
-                            <Grid item={true} sm={6}>
+                            <Grid item={true} sm={6} style={styles.grid}>
 
                                 <TextField
                                     required
@@ -133,9 +116,8 @@ export default class DetailsPersonal extends Component {
                                     variant="outlined"
                                     error={this.state.passwordError}
                                 />
-
                             </Grid>
-                            <Grid item={true} sm={6}>
+                            <Grid item={true} sm={6} style={styles.grid}>
                                 <TextField
                                     required
                                     label="Confirmação de senha"
@@ -146,36 +128,20 @@ export default class DetailsPersonal extends Component {
                                     variant="outlined"
                                     error={this.state.confirmPasswordError}
                                 />
-
                             </Grid>
-                            <Grid item={true} sm={6} >
+                            <Grid item={true} xs={12} style={styles.grid}>
                                 <Button item={true} sm={6} variant="contained" color="primary" onClick={this.continue}
-                                    style={styles.button}
-                                    
-                                >
+                                    style={styles.button}      >
                                     Próximo
                         </Button>
-
                             </Grid>
-
-                            <Grid item={true} xs={12}>
-                                <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar}/>
-
+                            <Grid item={true} md={12}>
+                                <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
                             </Grid>
                         </Grid>
-
-
                     </Box>
-
                 </div>
-
-
-
-
-                
             </React.Fragment>
-
-
         )
 
     }

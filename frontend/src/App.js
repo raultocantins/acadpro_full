@@ -1,13 +1,11 @@
 import React from 'react';
-import Signup from './Components/Signup/Signup'
+import Home from './Components/Home/Home'
 import './App.css';
-
 function App() {
-  return (
+  return (    
     <div className="App">
-<Signup />
-    </div>
+    <Home/>
+    </div>   
   );
 }
-
 export default App;

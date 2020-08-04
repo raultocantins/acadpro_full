@@ -24,7 +24,7 @@ export default class Verif extends Component {
         e.preventDefault()
         const { name, email, facebook, number, instagram, kit, cep, url, password, confirmPassword } = this.props.values
         const user = { name, email, facebook, number, instagram, kit, cep, url, password, confirmPassword }
-        Axios.post("http://localhost:4000/signup", user)
+        Axios.post('http://localhost:4000/signup', user)
             .then(res => {
                 this.props.nextStep()
             })
@@ -58,6 +58,10 @@ export default class Verif extends Component {
                 height: "40px"
             },
             toasted: { position: "absolute", height: "100px", width: '300px' }
+            ,
+            grid:{
+                display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
+            }
         }
 
         const { name, email, facebook, number, instagram, kit, cep, url, step } = this.props.values
@@ -76,7 +80,7 @@ export default class Verif extends Component {
                     </Collapse>
                     <Box boxShadow={3}>
 
-                        <Grid container sm={12} alignItems='center' alignContent='between' justify='center'>
+                        <Grid container sm={12} alignItems='center' alignContent='between' justify='center' className="grid">
                             <Grid item='true' sm={12}>
                                 <Paper elevation={10}>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
@@ -84,7 +88,7 @@ export default class Verif extends Component {
                         </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} style={styles.list} sm={6}>
+                            <Grid item xs={6} style={styles.grid} sm={6}>
                                 <List >
                                     <ListItem  >
                                         <ListItemText primary="Nome" secondary={name} />
@@ -101,7 +105,7 @@ export default class Verif extends Component {
                                 </List>
 
                             </Grid>
-                            <Grid items xs={12} sm={6}>
+                            <Grid items xs={6} sm={6} style={styles.grid}>
                                 <List>
                                     <ListItem  >
                                         <ListItemText primary="Instagram" secondary={instagram} />
@@ -119,7 +123,7 @@ export default class Verif extends Component {
                                 </List>
 
                             </Grid>
-                            <Grid item sm={6}>
+                            <Grid item sm={6} style={styles.grid}>
                                 <Button variant="contained" color="primary" onClick={this.register}
                                     style={styles.buttonNext}
                                 >
@@ -130,7 +134,7 @@ export default class Verif extends Component {
                                 >Voltar
                         </Button>
                             </Grid>
-                            <Grid item='true' xs={12}>
+                            <Grid item='true' md={12}>
                                 <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
 
                             </Grid>
