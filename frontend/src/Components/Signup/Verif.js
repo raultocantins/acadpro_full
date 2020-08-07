@@ -2,7 +2,7 @@ import { Component } from 'react'
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 import Axios from 'axios'
-import './DetailsPersonal.css'
+import './index.css'
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button'
@@ -42,7 +42,7 @@ export default class Verif extends Component {
     render() {
         const styles = {
             div: {
-                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%"
+                marginTop: '100px'
             },
             buttonNext: {
                 marginTop: '40px', marginRight: '5px', marginBottom: "40px"
@@ -55,10 +55,8 @@ export default class Verif extends Component {
                 padding: '10px'
             },
             progressBar: {
-                height: "40px"
+                height: "20px"
             },
-            toasted: { position: "absolute", height: "100px", width: '300px' }
-            ,
             grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
             }
@@ -73,20 +71,23 @@ export default class Verif extends Component {
 
             <React.Fragment>
                 <div style={styles.div} className="container">
-                    <Collapse in={this.state.message}>
-                        <Alert color='error'>
-                           {this.state.message}
-                          </Alert>
-                    </Collapse>
+                   
                     <Box boxShadow={3}>
-
-                        <Grid container sm={12} alignItems='center' alignContent='between' justify='center' className="grid">
-                            <Grid item='true' sm={12}>
+                    <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
+                            <Grid item={true} sm={12}>
                                 <Paper elevation={10}>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                         Verificação de Dados
                         </Typography>
                                 </Paper>
+                            </Grid>
+                            <Grid item={true} xs={12}>
+                            <Collapse in={this.state.message}>
+                        <Alert color='error'>
+                           {this.state.message}
+                          </Alert>
+                    </Collapse>
+
                             </Grid>
                             <Grid item xs={6} style={styles.grid} sm={6}>
                                 <List >
@@ -123,7 +124,7 @@ export default class Verif extends Component {
                                 </List>
 
                             </Grid>
-                            <Grid item sm={6} style={styles.grid}>
+                            <Grid item sm={12} style={styles.grid}>
                                 <Button variant="contained" color="primary" onClick={this.register}
                                     style={styles.buttonNext}
                                 >
@@ -134,7 +135,7 @@ export default class Verif extends Component {
                                 >Voltar
                         </Button>
                             </Grid>
-                            <Grid item='true' md={12}>
+                            <Grid item={true} md={12}>
                                 <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
 
                             </Grid>

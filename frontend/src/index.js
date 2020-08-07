@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Signup from './Components/Signup/Signup'
 import Signin from './Components/Signin/Signin'
+import Product from './Components/Product/Product'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -16,7 +17,8 @@ ReactDOM.render(
       <Switch>
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
-        <Route path="/" exact={true} component={App} />
+        <Route path="/" exact={true} component={Product} />
+        <Route path="/inicio"  component={App} />
       </Switch>
     </Router>
   </div>,

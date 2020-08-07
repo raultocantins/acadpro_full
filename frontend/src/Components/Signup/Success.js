@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid'
 import sucesso from '../../assets/sucesso.svg'
 import Button from '@material-ui/core/Button'
-import './DetailsPersonal.css'
+import './index.css'
 import {
     Link
 } from "react-router-dom";
@@ -13,7 +13,7 @@ export default class Success extends Component {
     render() {
         const styles = {
             div: {
-                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%"
+                marginTop: '100px'
             },
             typography: {
                 padding: '10px'

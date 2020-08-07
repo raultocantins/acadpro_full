@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import './DetailsPersonal.css'
+import './index.css'
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField'
@@ -32,7 +32,7 @@ export default class Package extends Component {
     render() {
         const styles = {
             div: {
-                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%"
+                marginTop: '100px'
             },
             textfield: {
                 marginTop: '40px'
@@ -47,7 +47,7 @@ export default class Package extends Component {
                 padding: '10px'
             },
             progressBar: {
-                height: "40px"
+                height: "20px"
             },
             grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
@@ -65,21 +65,21 @@ export default class Package extends Component {
                 <div style={styles.div} className="container">
                     <Box boxShadow={3}>
 
-                        <Grid container sm={12} alignItems='center' alignContent='center' justify='center' className="grid">
-                            <Grid item='true' sm={12}>
+                    <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
+                            <Grid item={true} sm={12}>
                                 <Paper elevation={10}>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                         Escolha o Plano
                         </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item='true' sm={6} style={styles.grid}>
+                            <Grid item={true} sm={12} style={styles.grid}>
                                 <TextField
                                     id="standard-select-currency"
                                     select
                                     label="Select"
                                     value={kit}
-                                    
+
                                     style={styles.textfield}
                                     onChange={this.props.handleChange('kit')}
                                     helperText="Selecione o plano"
@@ -96,21 +96,8 @@ export default class Package extends Component {
                                 </TextField>
 
                             </Grid>
-                            <Grid item='true' sm={6} style={styles.grid}>
-                                <input
-                                    style={{ display: 'none' }}
-                                    id="contained-button-file"
-                                    multiple
-                                    type="file"
-                                />
-                                <label htmlFor="contained-button-file">
-                                    <Button variant="contained" color="primary" component="span">
-                                        Foto de Perfil
-        </Button>
-                                </label>
-
-                            </Grid>
-                            <Grid item='true' sm={6} style={styles.grid}>
+                            
+                            <Grid item={true} sm={12} style={styles.grid}>
                                 <Button variant="contained" color="primary" onClick={this.continue}
                                     style={styles.buttonNext}
                                 >
@@ -122,7 +109,7 @@ export default class Package extends Component {
                         </Button>
 
                             </Grid>
-                            <Grid item='true' md={12}>
+                            <Grid item={true} md={12}>
                                 <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
 
                             </Grid>

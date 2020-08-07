@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import './DetailsPersonal.css'
+import './index.css'
 import React from 'react';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -26,7 +26,7 @@ export default class DetailsPersonal extends Component {
         })
         if (name.length < 10) {
             this.setState({ nameError: "Nome inválido" })
-        } else if (email.length < 10) {
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             this.setState({ emailError: "Email inválido" })
         } else if (!password || password.length < 8) {
             this.setState({ passwordError: "Senha inválida" })
@@ -42,7 +42,7 @@ export default class DetailsPersonal extends Component {
     render() {
         const styles = {
             div: {
-                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%",display:"flex"
+                marginTop: '100px'
             },
             textfield: {
                 marginTop: '40px'
@@ -54,7 +54,7 @@ export default class DetailsPersonal extends Component {
                 padding: '10px'
             },
             progressBar: {
-                height: "40px"
+                height: "20px"
             },
             grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
@@ -64,6 +64,7 @@ export default class DetailsPersonal extends Component {
         const { progressBar } = this.props
         return (
             <React.Fragment >
+                
                 <div style={styles.div} className="container" >
                     <Box boxShadow={3} >
                         <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
@@ -141,6 +142,7 @@ export default class DetailsPersonal extends Component {
                         </Grid>
                     </Box>
                 </div>
+               
             </React.Fragment>
         )
 

@@ -1,0 +1,38 @@
+.container{
+    height: 60vh;
+    width: 60vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+#root{
+        display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+  
+}
+.grid{
+    height: 100%!important;
+    width: 100%!important;
+   
+}
+
+
+
+
+@media (max-width:500px){
+    .container{
+        width: 100%!important;
+         height: 100vh!important;
+         margin: 0px!important;
+                    
+       
+    }.grid{
+        width: 100vw!important;
+        height: 100vh!important;
+    }
+}

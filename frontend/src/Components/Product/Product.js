@@ -4,7 +4,7 @@ export default class Home extends Component {
         return(
            
 
-                <h1>Home</h1>
+                <h1>Pagina do produto</h1>
 
             
         )

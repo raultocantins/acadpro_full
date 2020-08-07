@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import './DetailsPersonal.css'
+import './index.css'
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField'
@@ -46,7 +46,7 @@ export default class DetailsRedesSociais extends Component {
     render() {
         const styles = {
             div: {
-                marginTop: '100px', width: "50%", height: "auto", marginLeft: "25%", marginRight: "25%"
+                marginTop: '100px'
             },
             textfield: {
                 marginTop: '40px'
@@ -61,7 +61,7 @@ export default class DetailsRedesSociais extends Component {
                 padding: '10px'
             },
             progressBar:{
-               height:"40px"
+                height: "20px"
             },
             grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"

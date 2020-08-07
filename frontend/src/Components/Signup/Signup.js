@@ -5,7 +5,6 @@ import DetailsPersonal from './DetailsPersonal'
 import Package from './Package'
 import Success from './Success'
 import Verif from './Verif'
-import './Signup.css'
 export default class Signup extends Component {
     state = {
         step: 1,
