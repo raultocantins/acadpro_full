@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import Axios from 'axios'
 import Academia from '../../assets/academia.svg'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
+import Collapse from '@material-ui/core/Collapse';
+import Alert from '@material-ui/lab/Alert';
 
 import {
-    Link
+    Link,Redirect
 } from "react-router-dom";
 import './Signin.css'
 
@@ -16,12 +19,15 @@ export default class Signin extends Component {
         email: "",
         password: "",
         emailError: "",
+        error: "",
         checkedA: false,
     }
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this)
         this.handleChangecheckbox = this.handleChangecheckbox.bind(this)
+        this.validation = this.validation.bind(this)
+
     }
     handleChange = input => e => {
         this.setState({ [input]: e.target.value })
@@ -29,6 +35,23 @@ export default class Signin extends Component {
     handleChangecheckbox = (event) => {
         this.setState({ [event.target.name]: event.target.checked });
     };
+    validation() {
+        var { email, password } = this.state
+        this.setState({ emailError: '' })
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.state.email)) {
+            this.setState({ emailError: "Email inválido" })
+        } else {
+            Axios.post('http://localhost:4000/signin', { email, password })
+                .then(res => {
+                    window.localStorage.setItem('logToken',res.data)
+                    alert(res)
+                    return <Redirect to="/home"/>
+                })
+                .catch(err => { this.setState({ error: err.response.data }) })
+
+        }
+        
+    }
     render() {
         return (<div className="container-signin">
             <div className="container-box">
@@ -56,6 +79,15 @@ export default class Signin extends Component {
                                 Entrar
                         </Typography>
                         </Grid>
+                        <Grid item={true} xs={12}>
+                            <Collapse in={this.state.error}>
+                                <Alert color='error'>
+                                    {this.state.error}
+                                </Alert>
+                            </Collapse>
+
+                        </Grid>
+
                         <Grid item={true} sm={12} className="grid-email" >
                             <TextField
                                 className="input-email"
@@ -67,7 +99,7 @@ export default class Signin extends Component {
                                 variant="outlined"
                                 floatinglabeltext="Email"
                                 error={this.state.emailError}
-                                helperText={this.state.nameError ? this.state.nameError : "Insira seu Email"}
+                                helperText={this.state.emailError ? this.state.emailError : "Insira seu Email"}
                             />
                         </Grid>
                         <Grid item={true} sm={12} className="grid-password">
@@ -87,31 +119,31 @@ export default class Signin extends Component {
 
                         </Grid>
                         <Grid item={true} sm={12} className="checkbox">
-                            < Grid item={true} sm={12} style={{display:'flex',justifyContent:"center",alignItems:"center"}}>
-                                <label style={{marginRight:"10px"}}>
-                                <Checkbox
-                                style={{paddingRight:'5px'}}
-                                    checked={this.state.checkedA}
-                                    onChange={this.handleChangecheckbox}
-                                    name="checkedA"
-                                    color="primary"
+                            < Grid item={true} sm={12} style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                                <label style={{ marginRight: "10px" }}>
+                                    <Checkbox
+                                        style={{ paddingRight: '5px' }}
+                                        checked={this.state.checkedA}
+                                        onChange={this.handleChangecheckbox}
+                                        name="checkedA"
+                                        color="primary"
 
-                                />Lembrar Usuário
+                                    />Lembrar Usuário
                                 </label>
                                 <Link to='/signup'>
-                               Esqueceu sua senha?
+                                    Esqueceu sua senha?
                                 </Link>
                             </Grid>
-                            
+
 
                         </Grid>
-                        
+
                         <Grid item={true} sm={12} className="grid-btn">
-                            <Button className="btn-entrar" color="primary" variant="contained" >
+                            <Button className="btn-entrar" color="primary" variant="contained" onClick={this.validation} >
                                 Entrar
                         </Button>
                         </Grid>
-                        
+
 
                     </Grid>
                 </div>
