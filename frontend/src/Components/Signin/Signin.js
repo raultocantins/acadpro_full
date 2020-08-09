@@ -10,7 +10,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
 
 import {
-    Link,Redirect
+    Link, Redirect
 } from "react-router-dom";
 import './Signin.css'
 
@@ -43,14 +43,14 @@ export default class Signin extends Component {
         } else {
             Axios.post('http://localhost:4000/signin', { email, password })
                 .then(res => {
-                    window.localStorage.setItem('logToken',res.data)
+                    window.localStorage.setItem('logToken', res.data)
                     alert(res)
-                    return <Redirect to="/home"/>
+                    return <Redirect to="/home" />
                 })
                 .catch(err => { this.setState({ error: err.response.data }) })
 
         }
-        
+
     }
     render() {
         return (<div className="container-signin">
@@ -73,19 +73,16 @@ export default class Signin extends Component {
                     </div>
                 </div>
                 <div className="login">
-                    <Grid container className="grid-container">
-                        <Grid item={true} sm={12}>
+                    <Grid container xs={12} className="grid-container">
+                        <Grid item={true} sm={12} >
                             <Typography variant='h4' align='center' color='primary' className='text-entrar' >
                                 Entrar
                         </Typography>
-                        </Grid>
-                        <Grid item={true} xs={12}>
-                            <Collapse in={this.state.error}>
+                            <Collapse in={this.state.error} className='error-login' >
                                 <Alert color='error'>
                                     {this.state.error}
                                 </Alert>
                             </Collapse>
-
                         </Grid>
 
                         <Grid item={true} sm={12} className="grid-email" >
@@ -139,9 +136,15 @@ export default class Signin extends Component {
                         </Grid>
 
                         <Grid item={true} sm={12} className="grid-btn">
-                            <Button className="btn-entrar" color="primary" variant="contained" onClick={this.validation} >
+                            <Button  className="btn-entrar" color="primary" variant="contained" onClick={this.validation} >
                                 Entrar
                         </Button>
+                            <Link to='/signup' >
+
+                                <Button className="btn-register" color="default" variant="contained" >
+                                    Inscrever
+                        </Button>
+                            </Link>
                         </Grid>
 
 
