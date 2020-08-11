@@ -24,6 +24,7 @@ module.exports = app => {
             kit:user.kit,
             iat: now,
             exp: now + (60 * 60 * 24)
+      
         }
         res.json({
             ...payload,
@@ -38,7 +39,7 @@ module.exports = app => {
             if(userData.token){
                 const token=jwt.decode(userData.token,authSecret)
                 if(new Date(token.exp*1000)>new Date()){
-                    return res.send(true)
+                    return res.send(userData)
                 }
             }
         }catch(e){

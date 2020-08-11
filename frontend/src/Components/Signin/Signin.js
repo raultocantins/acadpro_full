@@ -8,9 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
+import api from '../../api'
 
 import {
-    Link, Redirect
+    Link
 } from "react-router-dom";
 import './Signin.css'
 
@@ -20,7 +21,7 @@ export default class Signin extends Component {
         password: "",
         emailError: "",
         error: "",
-        checkedA: false,
+        checkedA: false
     }
     constructor(props) {
         super(props)
@@ -43,9 +44,12 @@ export default class Signin extends Component {
         } else {
             Axios.post('http://localhost:4000/signin', { email, password })
                 .then(res => {
-                    window.localStorage.setItem('logToken', res.data)
-                    alert(res)
-                    return <Redirect to="/home" />
+                    var token = JSON.stringify(res.data)
+                    var tokenJSON = JSON.parse(token)
+                    window.localStorage.setItem('logToken', token)
+                    api.defaults.headers.common['Authorization'] = `Bearer ${tokenJSON.token}`;
+                    this.props.history.push("/home");
+
                 })
                 .catch(err => { this.setState({ error: err.response.data }) })
 
@@ -53,104 +57,107 @@ export default class Signin extends Component {
 
     }
     render() {
-        return (<div className="container-signin">
-            <div className="container-box">
-                <div className="logo-register">
-                    <img src={Academia} alt="academia-logo" className="academia-logo" />
-                    <h1>Get Started</h1>
-                    <div className="grup-buttons ">
-                        <Link to="/signup">
-                            <Button className="btn-coach " color="primary">
-                                Inscrever como Treinador
-                        </Button>
-                        </Link>
-                        <Link to="/signup">
-                            <Button className="btn-gym">
-                                Inscrever como Academia
-                        </Button>
-                        </Link>
 
+        return (
+
+            <div className="container-signin">
+                <div className="container-box">
+                    <div className="logo-register">
+                        <img src={Academia} alt="academia-logo" className="academia-logo" />
+                        <h1>Get Started</h1>
+                        <div className="grup-buttons ">
+                            <Link to="/signup">
+                                <Button className="btn-coach " color="primary">
+                                    Inscrever como Treinador
+                        </Button>
+                            </Link>
+                            <Link to="/signup">
+                                <Button className="btn-gym">
+                                    Inscrever como Academia
+                        </Button>
+                            </Link>
+
+                        </div>
                     </div>
-                </div>
-                <div className="login">
-                    <Grid container xs={12} className="grid-container">
-                        <Grid item={true} sm={12} >
-                            <Typography variant='h4' align='center' color='primary' className='text-entrar' >
-                                Entrar
+                    <div className="login">
+                        <Grid container xs={12} className="grid-container">
+                            <Grid item={true} sm={12} >
+                                <Typography variant='h4' align='center' color='primary' className='text-entrar' >
+                                    Entrar
                         </Typography>
-                            <Collapse in={this.state.error} className='error-login' >
-                                <Alert color='error'>
-                                    {this.state.error}
-                                </Alert>
-                            </Collapse>
-                        </Grid>
+                                <Collapse in={this.state.error} className='error-login' >
+                                    <Alert color='error'>
+                                        {this.state.error}
+                                    </Alert>
+                                </Collapse>
+                            </Grid>
 
-                        <Grid item={true} sm={12} className="grid-email" >
-                            <TextField
-                                className="input-email"
-                                required
-                                id="outlined-read-only-input"
-                                label="Email"
-                                defaultValue={this.state.email}
-                                onChange={this.handleChange('email')}
-                                variant="outlined"
-                                floatinglabeltext="Email"
-                                error={this.state.emailError}
-                                helperText={this.state.emailError ? this.state.emailError : "Insira seu Email"}
-                            />
-                        </Grid>
-                        <Grid item={true} sm={12} className="grid-password">
-                            <TextField
-                                className="input-password"
-                                type="password"
-                                required
-                                id="outlined-read-only-input"
-                                label="Senha"
-                                defaultValue={this.state.passwordl}
-                                onChange={this.handleChange('password')}
-                                variant="outlined"
-                                floatinglabeltext="Senha"
-                                error={this.state.passwordError}
-                                helperText={this.state.passwordError ? this.state.passwordError : "Insira sua Senha"}
-                            />
+                            <Grid item={true} sm={12} className="grid-email" >
+                                <TextField
+                                    className="input-email"
+                                    required
+                                    id="outlined-read-only-input"
+                                    label="Email"
+                                    defaultValue={this.state.email}
+                                    onChange={this.handleChange('email')}
+                                    variant="outlined"
+                                    floatinglabeltext="Email"
+                                    error={this.state.emailError}
+                                    helperText={this.state.emailError ? this.state.emailError : "Insira seu Email"}
+                                />
+                            </Grid>
+                            <Grid item={true} sm={12} className="grid-password">
+                                <TextField
+                                    className="input-password"
+                                    type="password"
+                                    required
+                                    id="outlined-read-only-input"
+                                    label="Senha"
+                                    defaultValue={this.state.passwordl}
+                                    onChange={this.handleChange('password')}
+                                    variant="outlined"
+                                    floatinglabeltext="Senha"
+                                    error={this.state.passwordError}
+                                    helperText={this.state.passwordError ? this.state.passwordError : "Insira sua Senha"}
+                                />
 
-                        </Grid>
-                        <Grid item={true} sm={12} className="checkbox">
-                            < Grid item={true} sm={12} style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
-                                <label style={{ marginRight: "10px" }}>
-                                    <Checkbox
-                                        style={{ paddingRight: '5px' }}
-                                        checked={this.state.checkedA}
-                                        onChange={this.handleChangecheckbox}
-                                        name="checkedA"
-                                        color="primary"
+                            </Grid>
+                            <Grid item={true} sm={12} className="checkbox">
+                                < Grid item={true} sm={12} style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+                                    <label style={{ marginRight: "10px" }}>
+                                        <Checkbox
+                                            style={{ paddingRight: '5px' }}
+                                            checked={this.state.checkedA}
+                                            onChange={this.handleChangecheckbox}
+                                            name="checkedA"
+                                            color="primary"
 
-                                    />Lembrar Usuário
+                                        />Lembrar Usuário
                                 </label>
-                                <Link to='/signup'>
-                                    Esqueceu sua senha?
+                                    <Link to='/signup'>
+                                        Esqueceu sua senha?
+                                </Link>
+                                </Grid>
+
+
+                            </Grid>
+
+                            <Grid item={true} sm={12} className="grid-btn">
+                                <Button className="btn-entrar" color="primary" variant="contained" onClick={this.validation} >
+                                    Entrar
+                        </Button>
+                                <Link to='/signup' >
+
+                                    <Button className="btn-register" color="default" variant="contained" >
+                                        Inscrever
+                        </Button>
                                 </Link>
                             </Grid>
 
 
                         </Grid>
-
-                        <Grid item={true} sm={12} className="grid-btn">
-                            <Button  className="btn-entrar" color="primary" variant="contained" onClick={this.validation} >
-                                Entrar
-                        </Button>
-                            <Link to='/signup' >
-
-                                <Button className="btn-register" color="default" variant="contained" >
-                                    Inscrever
-                        </Button>
-                            </Link>
-                        </Grid>
-
-
-                    </Grid>
+                    </div>
                 </div>
-            </div>
-        </div>)
+            </div>)
     }
 }

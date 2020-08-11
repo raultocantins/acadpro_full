@@ -43,7 +43,7 @@ module.exports = app => {
 
         delete user.confirmPassword
         if (user.id) {
-            delete user.deletedAt
+            delete user.createAt
             app.db('users')
                 .update(user)
                 .where({ id: user.id ,gymId:user.gymId })

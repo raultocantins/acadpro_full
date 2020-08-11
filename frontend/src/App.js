@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { Component } from "react";
+import Routes from './routes'
 
-import './App.css';
-function App() {
-  return (    
-    <div className="App">
-    <h1>home aqui</h1>
-    </div>   
-  );
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+
+    }
+  } 
+  
+  render() {
+    return (
+      <Routes/>
+    )
+  }
 }
-export default App;
+
+
+
+

@@ -11,7 +11,8 @@ module.exports=app=>{
       .all(app.config.passport.authenticate())
       .delete(app.api.register.gym.remove)   
    //Validate token
-   app.route('/validateToken',app.api.auth.validateToken)
+   app.route('/validateToken')
+      .post(app.api.auth.validateToken)
      
    //alteração de academia
    app.route('/gym/:id')
