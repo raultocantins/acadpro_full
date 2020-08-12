@@ -1,10 +1,13 @@
 .container{
-    height: 60vh;
-    width: 60vw;
+    height: 70vh!important;
+    width: 50vw!important;  
+    height:70vh;   
     display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    align-items: stretch;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 10px; 
+   
     
 }
 #root{
@@ -18,11 +21,29 @@
 .grid{
     height: 100%!important;
     width: 100%!important;
+    align-content: stretch;
+   
+   
+ 
    
 }
+.paper-title{
+    background-color: #3f51b5!important;
+    color:#ffff
+}
+.background{
 
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-
+.progressBar{
+    height:20px!important;
+  
+}
 
 @media (max-width:500px){
     .container{

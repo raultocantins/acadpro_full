@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
+import iconRegister from '../../assets/icons8-gym-48.png'
 import api from '../../api'
 
 import {
@@ -67,15 +68,12 @@ export default class Signin extends Component {
                         <h1>Get Started</h1>
                         <div className="grup-buttons ">
                             <Link to="/signup">
+                               
                                 <Button className="btn-coach " color="primary">
-                                    Inscrever como Treinador
+                                <img src={iconRegister} alt='icon_register'className='icon_register'/>
+                                    Inscreva-se
                         </Button>
-                            </Link>
-                            <Link to="/signup">
-                                <Button className="btn-gym">
-                                    Inscrever como Academia
-                        </Button>
-                            </Link>
+                            </Link>                           
 
                         </div>
                     </div>

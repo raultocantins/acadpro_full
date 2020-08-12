@@ -40,10 +40,7 @@ export default class Verif extends Component {
     }
 
     render() {
-        const styles = {
-            div: {
-                marginTop: '100px'
-            },
+        const styles = {            
             buttonNext: {
                 marginTop: '40px', marginRight: '5px', marginBottom: "40px"
             },
@@ -52,12 +49,9 @@ export default class Verif extends Component {
             },
 
             typography: {
-                padding: '10px'
+                padding: '10px',color:'#fff'
             },
-            progressBar: {
-                height: "20px"
-            },
-            grid:{
+                       grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
             }
         }
@@ -70,18 +64,19 @@ export default class Verif extends Component {
         return (
 
             <React.Fragment>
+                     <div className="background">
                 <div style={styles.div} className="container">
                    
-                    <Box boxShadow={3}>
+                    <Box boxShadow={0}>
                     <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
-                            <Grid item={true} sm={12}>
-                                <Paper elevation={10}>
+                            <Grid item sm={12}  xs={12}>
+                                <Paper elevation={10} className='paper-title'>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                         Verificação de Dados
                         </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item={true} xs={12}>
+                            <Grid item xs={12}>
                             <Collapse in={this.state.message}>
                         <Alert color='error'>
                            {this.state.message}
@@ -135,8 +130,8 @@ export default class Verif extends Component {
                                 >Voltar
                         </Button>
                             </Grid>
-                            <Grid item={true} md={12}>
-                                <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
+                            <Grid item md={12}>
+                                <LinearProgress variant="determinate" value={progressBar(step)}  className='progressBar' />
 
                             </Grid>
 
@@ -146,7 +141,7 @@ export default class Verif extends Component {
                     </Box>
                 </div>
 
-
+                </div>
 
             </React.Fragment>
 

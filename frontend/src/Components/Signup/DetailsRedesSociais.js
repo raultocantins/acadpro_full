@@ -45,9 +45,7 @@ export default class DetailsRedesSociais extends Component {
 
     render() {
         const styles = {
-            div: {
-                marginTop: '100px'
-            },
+           
             textfield: {
                 marginTop: '40px'
             },
@@ -58,11 +56,9 @@ export default class DetailsRedesSociais extends Component {
                 marginTop: '40px', marginBottom: "40px"
             },
             typography: {
-                padding: '10px'
+                padding: '10px',color:'#fff'
             },
-            progressBar:{
-                height: "20px"
-            },
+         
             grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
             }
@@ -76,17 +72,19 @@ export default class DetailsRedesSociais extends Component {
         return (
 
             <React.Fragment>
+
+<div className="background">
 <div style={styles.div} className="container">
-<Box boxShadow={3}>
+<Box boxShadow={0}>
                 <Grid container sm={12} alignItems='center' alignContent='between' justify='center' className="grid">
-                    <Grid item={true} sm={12}>
-                        <Paper elevation={10}>
+                    <Grid item sm={12}  xs={12}>
+                        <Paper elevation={10} className='paper-title'>
                             <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                 Redes Sociais
                         </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item={true} sm={6} style={styles.grid}>
+                    <Grid item sm={6} style={styles.grid}>
                         <TextField
 
                             label="Facebook"
@@ -98,7 +96,7 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item={true} sm={6} style={styles.grid}>
+                    <Grid item sm={6} style={styles.grid}>
                         <TextField
                             label="Instagram"
                             floatinglabeltext="Instagram" style={styles.textfield} defaultValue={instagram}
@@ -110,7 +108,7 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item={true} sm={6} style={styles.grid}>
+                    <Grid item sm={6} style={styles.grid}>
                         <TextField
                             required
                             label="Telefone"
@@ -123,7 +121,7 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item={true} sm={6}style={styles.grid}>
+                    <Grid item sm={6}style={styles.grid}>
                         <TextField
                             required
                             label="Cep"
@@ -136,20 +134,20 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item={true} xs={12} style={styles.grid}>
-                        <Button item={true} xs={6} variant="contained" color="primary" onClick={this.continue}
+                    <Grid item xs={12} style={styles.grid}>
+                        <Button item xs={6} variant="contained" color="primary" onClick={this.continue}
                             style={styles.buttonNext}
                         >
                             Próximo
                         </Button>
-                        <Button item={true} xs={6} variant="contained" color="default" onClick={this.prev}
+                        <Button item xs={6} variant="contained" color="default" onClick={this.prev}
                             style={styles.buttonPrev}
                         >Voltar
                         </Button>
 
                     </Grid>
-                    <Grid item={true} md={12}>
-                        <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar}/>
+                    <Grid item md={12}>
+                        <LinearProgress variant="determinate" value={progressBar(step)} className='progressBar'/>
 
                     </Grid>
 
@@ -159,6 +157,7 @@ export default class DetailsRedesSociais extends Component {
 
 
 </Box>
+</div>
 </div>
             </React.Fragment>
 

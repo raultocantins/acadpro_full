@@ -11,17 +11,11 @@ import {
 export default class Success extends Component {
 
     render() {
-        const styles = {
-            div: {
-                marginTop: '100px'
-            },
+        const styles = {           
             typography: {
-                padding: '10px'
+                padding: '10px',color:'#fff'
             },
-            progressBar: {
-                height: "40px"
-            },
-            sucesso: {
+                       sucesso: {
                 width: '100%',
                 height: "300px",
                 marginTop: "40px",
@@ -34,19 +28,22 @@ export default class Success extends Component {
             link: { outline: 'none', textDecoration: "none", color: "white" }
         }
         return (
+            <div className="background">
+
+         
             <div style={styles.div} className="container">
                 <Grid container alignItems='center' alignContent='center' justify='center' className="grid">
-                    <Grid item='true' xs={12}>
-                        <Paper elevation={10}>
+                    <Grid item xs={12}>
+                        <Paper elevation={10} className='paper-title'>
                             <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                 Cadastro finalizado com sucesso
                 </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item='true' xs={12} alignItems='center' justify='center' alignContent='center'>
+                    <Grid item xs={12} alignItems='center' justify='center' alignContent='center'>
                         <img src={sucesso} alt="sucesso" style={styles.sucesso} />
                     </Grid>
-                    <Grid item='true' xs={12}  >
+                    <Grid item xs={12}  >
                         <Button variant="contained" color="primary" style={styles.buttonSignin}>
                             <Link to="/signin" style={styles.link}>
                                 Fazer Login
@@ -55,6 +52,7 @@ export default class Success extends Component {
                     </Grid>
                     
                 </Grid>
+            </div>
             </div>
 
 

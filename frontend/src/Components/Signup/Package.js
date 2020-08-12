@@ -31,9 +31,7 @@ export default class Package extends Component {
 
     render() {
         const styles = {
-            div: {
-                marginTop: '100px'
-            },
+           
             textfield: {
                 marginTop: '40px'
             },
@@ -44,11 +42,8 @@ export default class Package extends Component {
                 marginTop: '40px', marginBottom: "40px"
             },
             typography: {
-                padding: '10px'
-            },
-            progressBar: {
-                height: "20px"
-            },
+                padding: '10px',color:'#fff'
+            },          
             grid:{
                 display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
             }
@@ -62,18 +57,19 @@ export default class Package extends Component {
         return (
 
             <React.Fragment>
+                 <div className="background">
                 <div style={styles.div} className="container">
-                    <Box boxShadow={3}>
+                    <Box boxShadow={0}>
 
-                    <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
-                            <Grid item={true} sm={12}>
-                                <Paper elevation={10}>
+                    <Grid container sm={12} alignItems='center' alignContent='between' justify='center' className="grid">
+                            <Grid item sm={12}  xs={12}>
+                                <Paper elevation={10} className='paper-title'>
                                     <Typography variant='h4' align='center' style={styles.typography} color='primary'>
                                         Escolha o Plano
                         </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item={true} sm={12} style={styles.grid}>
+                            <Grid item sm={12} style={styles.grid}>
                                 <TextField
                                     id="standard-select-currency"
                                     select
@@ -97,7 +93,7 @@ export default class Package extends Component {
 
                             </Grid>
                             
-                            <Grid item={true} sm={12} style={styles.grid}>
+                            <Grid item sm={12} style={styles.grid}>
                                 <Button variant="contained" color="primary" onClick={this.continue}
                                     style={styles.buttonNext}
                                 >
@@ -109,8 +105,8 @@ export default class Package extends Component {
                         </Button>
 
                             </Grid>
-                            <Grid item={true} md={12}>
-                                <LinearProgress variant="determinate" value={progressBar(step)} style={styles.progressBar} />
+                            <Grid item md={12}>
+                                <LinearProgress variant="determinate" value={progressBar(step)}  className='progressBar' />
 
                             </Grid>
 
@@ -120,6 +116,7 @@ export default class Package extends Component {
 
 
                     </Box>
+                </div>
                 </div>
 
             </React.Fragment>
