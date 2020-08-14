@@ -9,6 +9,16 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Paper from "@material-ui/core/Paper";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom";
+import Dashboard from './Content/Dashboard'
+import Busines from './Content/Busines'
+import Users from './Content/Users'
+import User from './Content/User'
 import api from '../../api'
 import Axios from 'axios'
 import './Home.css'
@@ -31,11 +41,16 @@ export default class Home extends Component {
             url: '',
             data: []
         }
-        this.Logout = this.Logout.bind(this)
-       this.registerUser = this.registerUser.bind(this)
+       /* this.Logout = this.Logout.bind(this)
+       this.registerUser = this.registerUser.bind(this)*/
        this.openClosed = this.openClosed.bind(this);
     }
-    componentDidMount() {
+
+
+    componentDidMount(){
+      window.location.path='/home'
+    }
+   /* componentDidMount() {
         Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
@@ -69,7 +84,7 @@ export default class Home extends Component {
                 }
 
             })    }
-
+*/
             openClosed() {
                 if (this.state.on) {
                   this.setState({ on: false });
@@ -100,18 +115,28 @@ export default class Home extends Component {
             </Toolbar>
           </AppBar>
         </div>
+        <Router>
         <div
           className="aside"
           style={{ display: this.state.on ? "none" : "flex" }}
         >
-          <Paper style={{ width: "100%", height: "100%" }} elevation={0}>
+          <Paper variant="outlined" square elevation={3} style={{ width: "100%", height: "100%",backgroundColor:'#3f51b5',borderRadius:'none!important'}} elevation={0}>
             <Profile name={this.state.data.name}/>
             <Menu />
           </Paper>
         </div>
-        <div classNam e="content"></div>
+        <div classNam e="content">       
+               <Switch>
+                 
+                   <Route path='/home/dashboard'  component={Dashboard}/>
+                   <Route path='/home/users' component={Users}/>             
+                   <Route path='/home/user' component={User}/>             
+                   <Route path='/home/busines' component={Busines}/>             
+               </Switch>
+        </div>
+           </Router>
         <div className="footer">
-          <Paper elevation={3} style={{ height: "100%" }}>
+          <Paper elevation={3} style={{ height: "100%",backgroundColor:'#3f51b5' }}>
             <Typography variant="body1" color="default" align="center">
               {"Copyright © "}
 
