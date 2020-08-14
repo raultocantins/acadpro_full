@@ -14,13 +14,15 @@ export default class Profile extends Component {
           alt="profile"
           style={{ width: "100px", height: "50%", marginTop: "10px" }}
           className="avatar"
+          
         />
         <Typography
-          variant="h4"
+          variant="h5"
           style={{ width: "100%", height: "50%", marginTop: "10px" }}
         >
           {this.props.name}
         </Typography>
+       
       </div>
     );
   }

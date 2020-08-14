@@ -9,6 +9,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Paper from "@material-ui/core/Paper";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +28,7 @@ export default class Home extends Component {
    constructor(props) {
         super(props)
         this.state = {
+          title:'Dashboard',
             on: false,
             name: 'alex raul santo',
             email: 'alexbraul.arrr@gmail.com',
@@ -39,18 +42,19 @@ export default class Home extends Component {
             pressure: '',
             birth: '',
             url: '',
-            data: []
+            data: {name: 'Sparke Gym'}
         }
         this.Logout = this.Logout.bind(this)
        this.registerUser = this.registerUser.bind(this)
        this.openClosed = this.openClosed.bind(this);
+       this.handleTitle=this.handleTitle.bind(this)
     }
 
 
    
     componentDidMount() {
       window.location.path='/home'
-   
+  
         Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
@@ -83,7 +87,7 @@ export default class Home extends Component {
                     alert(err.response.data)
                 }
 
-            })    }
+            })   }
 
             openClosed() {
                 if (this.state.on) {
@@ -93,10 +97,14 @@ export default class Home extends Component {
                   this.setState({ on: true });
                 }
               }
+              handleTitle(value){
+                this.setState({title:value})
+              }
+
     render() {
 
         return ( 
-             <div className="container-home-open">
+             <div className={this.state.on?'container-home-closed':'container-home-open'}>
         <div className="appbar">
           <AppBar position="static" style={{ height: "100%" }}>
             <Toolbar
@@ -110,7 +118,7 @@ export default class Home extends Component {
               >
                 {this.state.on ? <MenuIcon /> : <ExpandLessIcon />}
               </IconButton>
-              <Typography variant="h4">Dashboard</Typography>
+        <Typography variant="h4">{this.state.title}</Typography>
               <Button color="inherit">Logout</Button>
             </Toolbar>
           </AppBar>
@@ -120,15 +128,15 @@ export default class Home extends Component {
           className="aside"
           style={{ display: this.state.on ? "none" : "flex" }}
         >
-          <Paper variant="outlined" square elevation={3} style={{ width: "100%", height: "100%",backgroundColor:'#3f51b5',borderRadius:'none!important'}} elevation={0}>
+          <Paper variant="outlined" square elevation={3} style={{ width: "100%", height: "100%"}} elevation={0}>
             <Profile name={this.state.data.name}/>
-            <Menu />
+            <Menu handleTitle={this.handleTitle} title={this.state.title}/>
           </Paper>
         </div>
-        <div classNam e="content">       
+        <div className="content">       
                <Switch>
-                 
-                   <Route path='/home/dashboard'  component={Dashboard}/>
+               <Route path='/home'  exact component={Dashboard}/>
+               <Route path='/home/dashboard'  component={Dashboard}/>
                    <Route path='/home/users' component={Users}/>             
                    <Route path='/home/user' component={User}/>             
                    <Route path='/home/busines' component={Busines}/>             
@@ -136,7 +144,7 @@ export default class Home extends Component {
         </div>
            </Router>
         <div className="footer">
-          <Paper elevation={3} style={{ height: "100%",backgroundColor:'#3f51b5' }}>
+          <Paper elevation={3} style={{ height: "100%"}}>
             <Typography variant="body1" color="default" align="center">
               {"Copyright © "}
 

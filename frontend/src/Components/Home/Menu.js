@@ -1,54 +1,59 @@
-import React from 'react';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Typography from '@material-ui/core/Typography';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import {Link} from 'react-router-dom'
+import React, { Component } from "react";
+import MenuList from "@material-ui/core/MenuList";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
+import iconDashboard from '../../assets/velocimetro.svg'
+import iconUsers from '../../assets/equipe.svg'
+import iconLucros from '../../assets/lucros.svg'
+import iconProfile from '../../assets/profile.svg'
+
+export default class Menu extends Component {
+constructor(props){
+  super(props)
+
+}
 
 
 
-export default function TypographyMenu() {
- 
-
+  render(){
+    const {handleTitle}=this.props
   return (
- 
-      <MenuList>
+    <MenuList>
+      <Link to="/home/dashboard" style={{outline:'none',textDecoration:"none"}}>
         <MenuItem>
-          <ListItemIcon>
-            <SendIcon />
+          <ListItemIcon style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>
+            <img src={iconDashboard} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
+          <Typography variant="inherit" >Dashboard</Typography>
           </ListItemIcon>
-          <Typography variant="inherit" >
-            <Link to='/home/dashboard'>Dashboard</Link>
-           </Typography>
         </MenuItem>
+      </Link>
+      <Link to="/home/users"  style={{outline:'none',textDecoration:"none"}}>
         <MenuItem>
-          <ListItemIcon>
-            <PriorityHighIcon  />
+          <ListItemIcon  style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>
+          <img src={iconUsers} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
+          <Typography variant="inherit">Alunos</Typography>
           </ListItemIcon>
-          <Typography variant="inherit" >
-            <Link to='/home/users'>users</Link>
-           </Typography>
         </MenuItem>
+      </Link>
+      <Link to="/home/busines" style={{outline:'none',textDecoration:"none"}}>
+        <MenuItem >
+          <ListItemIcon  style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>
+          <img src={iconLucros} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
+          <Typography variant="inherit">Finanças</Typography>
+          </ListItemIcon>
+        </MenuItem>
+      </Link>
+      <Link to="/home/user" style={{outline:'none',textDecoration:"none"}}>
         <MenuItem>
-          <ListItemIcon>
-            <DraftsIcon  />
+          <ListItemIcon  style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left"}}>
+          <img src={iconProfile} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
+          <Typography variant="inherit">Perfil</Typography>
           </ListItemIcon>
-          <Typography variant="inherit" >
-            <Link to='/home/busines'>Busines</Link>
-           </Typography>
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <DraftsIcon  />
-          </ListItemIcon>
-          <Typography variant="inherit" >
-            <Link to='/home/user'>Profile</Link>
-           </Typography>
-        </MenuItem>
-      </MenuList>
-    
-  );
+      </Link>
+    </MenuList>
+  )
+}
 }
