@@ -1,0 +1,7 @@
+.container-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.253);
+    margin-top: 15px;
+}
