@@ -21,7 +21,7 @@ constructor(props){
     const {handleTitle}=this.props
   return (
     <MenuList>
-      <Link to="/home/dashboard" style={{outline:'none',textDecoration:"none"}}>
+      <Link to="/home/dashboard" style={{outline:'none',textDecoration:"none"}} onClick={()=>this.props.handleTitle('Dashboard')}>
         <MenuItem>
           <ListItemIcon style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>
             <img src={iconDashboard} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
@@ -29,7 +29,7 @@ constructor(props){
           </ListItemIcon>
         </MenuItem>
       </Link>
-      <Link to="/home/users"  style={{outline:'none',textDecoration:"none"}}>
+      <Link to="/home/users"  style={{outline:'none',textDecoration:"none"}} onClick={()=>this.props.handleTitle('Alunos')}>
         <MenuItem>
           <ListItemIcon  style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>
           <img src={iconUsers} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
@@ -37,7 +37,7 @@ constructor(props){
           </ListItemIcon>
         </MenuItem>
       </Link>
-      <Link to="/home/busines" style={{outline:'none',textDecoration:"none"}}>
+      <Link to="/home/busines" style={{outline:'none',textDecoration:"none"}} onClick={()=>this.props.handleTitle('Finanças')}>
         <MenuItem >
           <ListItemIcon  style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>
           <img src={iconLucros} style={{height:'40px',width:'40px',marginRight:'10px'}}/>
@@ -45,7 +45,7 @@ constructor(props){
           </ListItemIcon>
         </MenuItem>
       </Link>
-      <Link to="/home/user" style={{outline:'none',textDecoration:"none"}}>
+      <Link to="/home/user" style={{outline:'none',textDecoration:"none"}} onClick={()=>this.props.handleTitle('Perfil')}>
         <MenuItem>
           <ListItemIcon  style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left"}}>
           <img src={iconProfile} style={{height:'40px',width:'40px',marginRight:'10px'}}/>

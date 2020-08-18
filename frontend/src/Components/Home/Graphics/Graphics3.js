@@ -4,7 +4,7 @@ import "./Graphics3.css";
 export default class Graphics3 extends Component {
   render() {
     return (
-      <Paper elevation={3}>
+      <Paper elevation={0}>
         <div className="card">
           <div className="card-content">
             <div className="columns columns-kpi is-mobile is-desktop has-block-display">

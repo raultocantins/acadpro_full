@@ -30,7 +30,7 @@ export default class Users extends Component {
           }}
         >
           <Grid item sm={12} style={{display:'flex',alignItems:'center',justifyContent:"center"}}>
-            <Paper elevation={3} style={{width:'90%'}}>         
+            <Paper elevation={0} style={{width:'90%'}}>         
              <RegisterUsers/>
             </Paper>
           </Grid>

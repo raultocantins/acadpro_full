@@ -4,10 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 export default class RegisterStep2 extends Component {
   state = {
     nameError: "",
@@ -22,7 +18,7 @@ export default class RegisterStep2 extends Component {
   render() {
     const styles = {
       textfield: {
-        marginTop: "10px",
+        marginTop: "0",
         width: "75%",
       },
       button: {
@@ -35,12 +31,10 @@ export default class RegisterStep2 extends Component {
 
       grid: {
         display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
+        
       },
     };
-    const { name, email } = this.props.values;
+    const { height, weight, fat, pressure, number } = this.props.values;
 
     return (
       <React.Fragment>
@@ -58,17 +52,16 @@ export default class RegisterStep2 extends Component {
                 <TextField
                   required
                   id="outlined-read-only-input"
-                  label="Nome"
-                  defaultValue={name}
-                  onChange={this.props.handleChange("name")}
+                  label="Peso"
+                  defaultValue={weight}
+                  onChange={this.props.handleChange("weight")}
                   variant="outlined"
                   style={styles.textfield}
-                  floatinglabeltext="Nome"
-                  error={this.state.nameError}
+                  floatinglabeltext="Peso"
                   helperText={
                     this.state.nameError
                       ? this.state.nameError
-                      : "Nome completo"
+                      : "Insira o peso(kg)"
                   }
                 />
               </Grid>
@@ -76,82 +69,88 @@ export default class RegisterStep2 extends Component {
                 <TextField
                   required
                   id="outlined-read-only-input"
-                  label="Email"
-                  defaultValue={name}
-                  onChange={this.props.handleChange("email")}
+                  label="Altura"
+                  defaultValue={height}
+                  onChange={this.props.handleChange("height")}
                   variant="outlined"
                   style={styles.textfield}
-                  floatinglabeltext="Email"
-                  error={this.state.nameError}
+                  floatinglabeltext="Altura"
                   helperText={
-                    this.state.nameError ? this.state.nameError : "Email"
+                    this.state.nameError
+                      ? this.state.nameError
+                      : "Insira a altura(M)"
                   }
                 />
               </Grid>
               <Grid item sm={4} style={styles.grid}>
                 <TextField
                   required
-                  floatinglabeltext="Data de Nascimento"
+                  floatinglabeltext="Percentual de Gordura"
                   style={styles.textfield}
                   id="outlined-read-only-input"
                   type="text"
-                  defaultValue={email}
-                  onChange={(e) => {
-                    this.img(e);
-                  }}
+                  defaultValue={fat}
+                  onChange={this.props.handleChange("fat")}
                   variant="outlined"
                   helperText={
                     this.state.emailError
                       ? this.state.emailError
-                      : "Insira Uma imagem"
+                      : "Insira o percentual de gordura"
                   }
-                  error={this.state.emailError}
                 />
               </Grid>
               <Grid
                 item
-                sm={6}
+                sm={12}
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   alignItens: "center",
-                  marginTop: "10px",
+                  
                 }}
               >
-                <FormControl
-                  variant="outlined"
-                  style={{ height: "100%", width: "83%" }}
+                <Grid
+                  item
+                  sm={6}
+                
                 >
-                  <InputLabel id="demo-simple-select-outlined-label">
-                    Planos
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={this.state.age}
-                    onChange={this.handleChange}
-                    label="Planos"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={30}>30 Dias R$70,00</MenuItem>
-                    <MenuItem value={90}>90 Dias R$200,00</MenuItem>
-                    <MenuItem value={365}>Anual R$700,00</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item sm={6} style={styles.grid}>
-                <TextField
-                  required
-                  floatinglabeltext="Data de Nascimento"
-                  style={{ margin: "0px" }}
-                  id="outlined-read-only-input"
-                  type="date"
-                  defaultValue={email}
-                  onChange={this.props.handleChange("birth")}
-                  variant="outlined"
-                />
+                  <TextField
+                    required
+                    floatinglabeltext="Pressão"
+                    style={styles.textfield}
+                    id="outlined-read-only-input"
+                    type="text"
+                    defaultValue={pressure}
+                    onChange={this.props.handleChange("pressure")}
+                    variant="outlined"
+                    helperText={
+                      this.state.emailError
+                        ? this.state.emailError
+                        : "Insira a Pressão"
+                    }
+                  />
+                </Grid>
+                <Grid
+                  item
+                  sm={6}
+                  
+                >
+                  <TextField
+                    required
+                    floatinglabeltext="Contato"
+                    style={styles.textfield}
+                    id="outlined-read-only-input"
+                    type="text"
+                    defaultValue={number}
+                    onChange={this.props.handleChange("number")}
+                    variant="outlined"
+                    helperText={
+                      this.state.emailError
+                        ? this.state.emailError
+                        : "Insira seu Contato de Telefone"
+                    }
+                  />
+                </Grid>
               </Grid>
 
               <Grid
@@ -169,7 +168,7 @@ export default class RegisterStep2 extends Component {
                     variant="contained"
                     color="primary"
                     style={{
-                        width: "10%",
+                      width: "10%",
                       marginTop: "10px",
                       marginRight: "5px",
                       backgroundColor: "red",
@@ -182,7 +181,7 @@ export default class RegisterStep2 extends Component {
                     variant="contained"
                     color="primary"
                     style={{
-                        width: "10%",
+                      width: "10%",
                       marginTop: "10px",
                       marginRight: "5px",
                       backgroundColor: "rgb(76, 175, 80)",

@@ -9,25 +9,21 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 export default class RegisterStep1 extends Component {
-  state = {
-    nameError: "",
-    emailError: "",
-    confirmPasswordError: "",
-    passwordError: "",
-    age: 1,
-  };
+  state={
+
+  }
+
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
   };
-  handleChange = (event) => {
-    this.setState({ age: event.target.value });
-  };
+
+ 
  
   render() {
     const styles = {
       textfield: {
-        marginTop: "10px",width:"75%"
+        width:"75%"
       },
       button: {
         margin: "20px",
@@ -39,13 +35,11 @@ export default class RegisterStep1 extends Component {
 
       grid: {
         display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
+       
       },
     };
 
-    const { name, email,date,url} = this.props.values;
+    const {name,email,days,birth,url} = this.props.values;
 
     return (
       <React.Fragment>
@@ -69,8 +63,7 @@ export default class RegisterStep1 extends Component {
                   onChange={this.props.handleChange("name")}
                   variant="outlined"
                   style={styles.textfield}
-                  floatinglabeltext="Nome"
-                  error={this.state.nameError}
+                  floatinglabeltext="Nome"                 
                   helperText={
                     this.state.nameError
                       ? this.state.nameError
@@ -87,10 +80,9 @@ export default class RegisterStep1 extends Component {
                   onChange={this.props.handleChange("email")}
                   variant="outlined"
                   style={styles.textfield}
-                  floatinglabeltext="Email"
-                  error={this.state.emailError}
+                  floatinglabeltext="Email"             
                   helperText={
-                    this.state.emailError ? this.state.emailError : "Email"
+                    this.state.emailError ? this.state.emailError : "Insira o Email"
                   }
                 />
               </Grid>
@@ -109,20 +101,20 @@ export default class RegisterStep1 extends Component {
                     this.state.urlError
                       ? this.state.urlError
                       : "Insira Uma imagem"
-                  }
-                  error={this.state.urlError}
+                  }              
                 />
               </Grid>
-              <Grid item sm={6} style={{display:'flex',justifyContent:"center",alignItens:"center",marginTop:'10px'}}>
+              <Grid item sm={6}  >
                 <FormControl variant="outlined" style={{height:'100%',width:'83%'}} >
                   <InputLabel id="demo-simple-select-outlined-label">
                     Planos
                   </InputLabel>
                   <Select
+               
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
-                    value={this.state.age}
-                    onChange={this.handleChange}
+                    value={days}
+                    onChange={this.props.handleChange("days")}
                     label="Planos"
                   >
                     <MenuItem value="">
@@ -139,12 +131,14 @@ export default class RegisterStep1 extends Component {
                   required
                   floatinglabeltext="Data de Nascimento"
                   style={{margin:'0px'}}
-                  id="outlined-read-only-input"
-                 
+                  id="outlined-read-only-input"                 
                   type="date"
-                  defaultValue={date}
+                  defaultValue={birth}
                   onChange={this.props.handleChange("birth")}
-                  variant="outlined"                 
+                  variant="outlined"     
+                  helperText={
+                    this.state.emailError ? this.state.emailError : "Data de nascimento"
+                  }           
                   
                 />
               </Grid>
@@ -167,10 +161,22 @@ export default class RegisterStep1 extends Component {
                   style={{
                     width: "10%",
                     marginTop: "10px",
+                    marginRight: "5px",
                     backgroundColor: "rgb(76, 175, 80)",
                   }}
                 >
                   Próximo
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"                 
+                  style={{
+                    width: "10%",
+                    marginTop: "10px",
+                    backgroundColor: "rgb(220, 0, 78)",
+                  }}
+                >
+                  Limpar
                 </Button>
               </Grid>
             </Grid>

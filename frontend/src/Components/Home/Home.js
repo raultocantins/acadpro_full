@@ -144,8 +144,8 @@ export default class Home extends Component {
         </div>
            </Router>
         <div className="footer">
-          <Paper elevation={3} style={{ height: "100%"}}>
-            <Typography variant="body1" color="default" align="center">
+          <Paper elevation={3} style={{ height: "100%",backgroundColor:"#3f51b5"}}>
+            <Typography variant="body1" style={{color:'#fff'}} align="center">
               {"Copyright © "}
 
               {new Date().getFullYear()}
