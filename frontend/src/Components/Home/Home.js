@@ -9,8 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Paper from "@material-ui/core/Paper";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,8 +42,8 @@ export default class Home extends Component {
             url: '',
             data: {name: 'Sparke Gym'}
         }
-       /* this.Logout = this.Logout.bind(this)
-       this.registerUser = this.registerUser.bind(this)*/
+        this.Logout = this.Logout.bind(this)
+       this.registerUser = this.registerUser.bind(this)
        this.openClosed = this.openClosed.bind(this);
        this.handleTitle=this.handleTitle.bind(this)
     }
@@ -54,7 +52,7 @@ export default class Home extends Component {
    
     componentDidMount() {
       window.location.path='/home'
-  /*
+  
         Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
@@ -65,9 +63,9 @@ export default class Home extends Component {
             .catch(err => {
                 this.props.history.push("/signin");
                 console.log(err)
-            })*/
+            })
     }
- /*   Logout() {
+    Logout() {
         window.localStorage.removeItem('logToken')
         api.defaults.headers.Authorization = `Bearer `
         this.props.history.push("/");
@@ -88,7 +86,7 @@ export default class Home extends Component {
                 }
 
             })   }
-*/
+
             openClosed() {
                 if (this.state.on) {
                   this.setState({ on: false });
