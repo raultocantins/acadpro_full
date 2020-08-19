@@ -36,6 +36,7 @@ export default class DetailsPersonal extends Component {
       this.props.nextStep();
     }
   };
+
   render() {
     const styles = {
       textfield: {
@@ -165,6 +166,7 @@ export default class DetailsPersonal extends Component {
                     variant="contained"
                     color="primary"
                     onClick={this.continue}
+                    
                     style={styles.button}
                   >
                     Próximo

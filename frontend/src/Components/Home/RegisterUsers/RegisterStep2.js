@@ -1,5 +1,6 @@
 import { Component } from "react";
 import React from "react";
+import api from '../../../api'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -11,10 +12,27 @@ export default class RegisterStep2 extends Component {
     confirmPasswordError: "",
     passwordError: "",
   };
+  constructor(props){
+    super(props)
+    this.Register=this.Register.bind(this)
+    this.AlterUser=this.AlterUser.bind(this)
+    this.DeleteUser=this.DeleteUser.bind(this)
+   
+  }
   preve = (e) => {
     e.preventDefault();
     this.props.prevStep();
   };
+
+Register(){
+  this.props.RegisterUser()
+}
+AlterUser(){
+  this.props.AlterUser()
+}
+DeleteUser(){
+  this.props.DeleteUser()
+}
   render() {
     const styles = {
       textfield: {
@@ -50,6 +68,7 @@ export default class RegisterStep2 extends Component {
             >
               <Grid item sm={4} style={styles.grid}>
                 <TextField
+                 disabled={this.props.values.deletar}
                   required
                   id="outlined-read-only-input"
                   label="Peso"
@@ -67,6 +86,7 @@ export default class RegisterStep2 extends Component {
               </Grid>
               <Grid item sm={4} style={styles.grid}>
                 <TextField
+                 disabled={this.props.values.deletar}
                   required
                   id="outlined-read-only-input"
                   label="Altura"
@@ -84,6 +104,7 @@ export default class RegisterStep2 extends Component {
               </Grid>
               <Grid item sm={4} style={styles.grid}>
                 <TextField
+                 disabled={this.props.values.deletar}
                   required
                   floatinglabeltext="Percentual de Gordura"
                   style={styles.textfield}
@@ -116,6 +137,7 @@ export default class RegisterStep2 extends Component {
                 >
                   <TextField
                     required
+                    disabled={this.props.values.deletar}
                     floatinglabeltext="Pressão"
                     style={styles.textfield}
                     id="outlined-read-only-input"
@@ -137,6 +159,7 @@ export default class RegisterStep2 extends Component {
                 >
                   <TextField
                     required
+                    disabled={this.props.values.deletar}
                     floatinglabeltext="Contato"
                     style={styles.textfield}
                     id="outlined-read-only-input"
@@ -163,10 +186,11 @@ export default class RegisterStep2 extends Component {
                   marginBottom: "10px",
                 }}
               >
-                {this.props.values.del ? (
+                {this.props.values.deletar ? (
                   <Button
                     variant="contained"
                     color="primary"
+                    onClick={this.DeleteUser}
                     style={{
                       width: "10%",
                       marginTop: "10px",
@@ -180,6 +204,7 @@ export default class RegisterStep2 extends Component {
                   <Button
                     variant="contained"
                     color="primary"
+                    onClick={this.props.values.id?this.AlterUser:this.Register}
                     style={{
                       width: "10%",
                       marginTop: "10px",
@@ -187,7 +212,7 @@ export default class RegisterStep2 extends Component {
                       backgroundColor: "rgb(76, 175, 80)",
                     }}
                   >
-                    Cadastrar
+                {this.props.values.id?'Alterar':'Cadastrar'}   
                   </Button>
                 )}
 

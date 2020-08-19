@@ -20,8 +20,12 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 export default class Registerusers extends Component{
   state={
+    id:'',
+    deletar:false,
     step:1,    
     name:'',
     email:'',
@@ -36,12 +40,12 @@ export default class Registerusers extends Component{
     page:0,
     rowsPerPage:5,
   data:[
-    {id:1,name:'Cupcake',plan:30,peso:80,altura:1.99},
-    {id:2,name:'Cupcake',plan:30,peso:80,altura:1.99},
-    {id:3,name:'Cupcake',plan:30,peso:80,altura:1.99},
-    {id:4,name:'Cupcake',plan:30,peso:80,altura:1.99},
-    {id:5,name:'Cupcake',plan:30,peso:80,altura:1.99},
-    {id:6,name:'Cupcake',plan:30,peso:80,altura:1.99},
+    {id:1,name:'Cupcake teste',days:90,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
+    {id:2,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
+    {id:3,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
+    {id:4,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
+    {id:5,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
+    {id:6,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
     ]
   }
 constructor(props){
@@ -49,6 +53,12 @@ constructor(props){
 this.CustomPaginationActionsTable=this.CustomPaginationActionsTable.bind(this)
 this.handleChange=this.handleChange.bind(this)
 this.nextStep=this.nextStep.bind(this)
+this.EditUser=this.EditUser.bind(this)
+this.RemoveUser=this.RemoveUser.bind(this)
+this.RegisterUser=this.RegisterUser.bind(this)
+this.AlterUser=this.AlterUser.bind(this)
+this.DeleteUser=this.DeleteUser.bind(this)
+this.ClearForm=this.ClearForm.bind(this)
 
 }  
 componentDidMount(){
@@ -72,7 +82,120 @@ prevStep = () => {
 handleChange = (input) => (e) => {
   this.setState({ [input]: e.target.value });
 };
+EditUser(row){
+  const{name,email,url,days,birth,weight,fat,pressure,height,number,id}=row
+this.setState({ 
+  id:id,
+name:name,
+email:email,
+birth:birth,
+url:url,
+days:days,
+weight:weight,
+fat:fat,
+pressure:pressure,
+height:height,
+number:number,
+step:2,
+deletar:false
+})
 
+}
+RemoveUser(row){
+  const{name,email,url,days,birth,weight,fat,pressure,height,number,id}=row
+  this.setState({
+    id:id, 
+  name:name,
+  email:email,
+  birth:birth,
+  url:url,
+  days:days,
+  weight:weight,
+  fat:fat,
+  pressure:pressure,
+  height:height,
+  number:number,
+  step:2,
+  deletar:true
+  })
+}
+RegisterUser(){
+  const {name,email,birth,url,days,weight,fat,pressure,number,height}=this.state
+  const dataUser={
+    name:name,
+    email:email,
+    birth:birth,
+    url:url,
+    days:days,
+    weight:weight,
+    fat:fat,
+    pressure:pressure,
+    height:height,
+    number:number
+  }
+  api.post('/users',dataUser)
+.then(res=>{
+alert('cadastrado com sucesso ')
+})
+.catch(err=>{
+alert('erro ao cadastrar')
+})
+
+}
+AlterUser(){
+  const {name,email,birth,url,days,weight,fat,pressure,number,height,id}=this.state
+  const dataUser={
+    name:name,
+    email:email,
+    birth:birth,
+    url:url,
+    days:days,
+    weight:weight,
+    fat:fat,
+    pressure:pressure,
+    height:height,
+    number:number
+  }
+  if(id){
+    api.put(`/users/${id}`,dataUser)
+    .then(res=>{
+    alert('Alterado com sucesso')
+    })
+    .catch(err=>{  
+      alert('Não foi possivel alterar')  
+    })
+  }else{
+    alert('id invalido')
+  }
+ 
+}
+DeleteUser(){
+  if(this.state.deletar){
+
+    api.delete(`/users/${this.state.id}`)
+    .then(res=>{
+      alert('usuario deletado com sucesso')
+    })
+    .catch(err=>{
+      alert(err)
+    })
+  }
+}
+ClearForm(){
+  this.setState({
+    name:'',
+    email:'',
+    birth:'',
+    url:'',
+    days:'',
+    weight:'',
+    fat:'',
+    pressure:'',
+    height:'',
+    number:'',
+  step:2  })
+
+}
 
 
 TablePaginationActions(props) {
@@ -166,20 +289,22 @@ TablePaginationActions(props) {
                     {row.name}
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="right">
-                    {row.plan}
+                    {row.days}
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="right">
-                    {row.peso}
+                    {row.weight}
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="right">
-                    {row.altura}
+                    {row.height}
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="right">
                     <h5>renovar</h5>
                   </TableCell>              
                   <TableCell style={{ width: 160 }} align="right">
-                    <button onClick={()=>alert(row.id)}>exckuir</button>
-                    <button onClick={()=>alert(row.id)} >alterar</button>
+                  
+                      <DeleteForeverIcon onClick={()=>this.RemoveUser(row)} style={{marginRight:'15px',color:'red'}}/>
+                   <EditIcon onClick={()=>this.EditUser(row)} style={{color:'#ffc107'}}/>
+                    
                   </TableCell>
                 </TableRow>
               ))}
@@ -213,16 +338,16 @@ TablePaginationActions(props) {
       );
     }  
 render(){
-  const {name,email,number,days,height,weight,fat,pressure,birth,url}=this.state
-  const values={name,email,number,days,height,weight,fat,pressure,birth,url}
+  const {name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar}=this.state
+  const values={name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar}
   return(
     <div>
        {this.state.step === 1 ? (
           <Step1
             nextStep={this.nextStep}
             handleChange={this.handleChange}
-            values={values}
-           
+            values={values} 
+           ClearForm={this.ClearForm}
                   
           />
         ) : (
@@ -230,7 +355,10 @@ render(){
             prevStep={this.prevStep}
             handleChange={this.handleChange}
             values={values}
-          />
+            RegisterUser={this.RegisterUser}
+            AlterUser={this.AlterUser}
+            DeleteUser={this.DeleteUser}
+            />
         )}
       {this.CustomPaginationActionsTable()}
     </div>

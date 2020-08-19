@@ -28,8 +28,13 @@ export default class Verif extends Component {
             .then(res => {
                 this.props.nextStep()
             })
-            .catch(err => {                
-                this.setState({ message: err.response.data })
+            .catch(err => {     
+                if(err.response){
+                    this.setState({ message: err.response.data })
+
+                }else{
+                    alert('Não foi possivel conectar ao servidor, Por favor Tente mais tarde!')
+                }           
             })
     }
 

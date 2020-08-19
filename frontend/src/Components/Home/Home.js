@@ -12,8 +12,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
+  Route 
 } from "react-router-dom";
 import Dashboard from './Content/Dashboard'
 import Busines from './Content/Busines'
@@ -23,25 +22,25 @@ import api from '../../api'
 import Axios from 'axios'
 import './Home.css'
 export default class Home extends Component {
+  state = {
+    title:'Dashboard',
+      on: false,
+      name: 'alex raul santo',
+      email: 'alexbraul.arrr@gmail.com',
+      password: '',
+      confirmPassword: '',
+      number: '',
+      days: '',
+      height: '',
+      weight: '',
+      fat: '',
+      pressure: '',
+      birth: '',
+      url: '',
+      data: {name: 'Sparke Gym'}
+  }
    constructor(props) {
         super(props)
-        this.state = {
-          title:'Dashboard',
-            on: false,
-            name: 'alex raul santo',
-            email: 'alexbraul.arrr@gmail.com',
-            password: '',
-            confirmPassword: '',
-            number: '',
-            days: '',
-            height: '',
-            weight: '',
-            fat: '',
-            pressure: '',
-            birth: '',
-            url: '',
-            data: {name: 'Sparke Gym'}
-        }
         this.Logout = this.Logout.bind(this)
        this.registerUser = this.registerUser.bind(this)
        this.openClosed = this.openClosed.bind(this);

@@ -12,14 +12,21 @@ export default class RegisterStep1 extends Component {
   state={
 
   }
+  constructor(props){
+    super(props)
+    this.ClearForm=this.ClearForm.bind(this)
+  }
 
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
+
   };
 
- 
- 
+
+ ClearForm(){
+   this.props.ClearForm()
+ }
   render() {
     const styles = {
       textfield: {
@@ -55,8 +62,8 @@ export default class RegisterStep1 extends Component {
               
             >
               <Grid item sm={4} style={styles.grid}>
-                <TextField
-                  required
+                <TextField  
+                disabled={this.props.values.deletar}               
                   id="outlined-read-only-input"
                   label="Nome"
                   defaultValue={name}
@@ -73,6 +80,7 @@ export default class RegisterStep1 extends Component {
               </Grid>
               <Grid item sm={4} style={styles.grid}>
                 <TextField
+                disabled={this.props.values.deletar}
                   required
                   id="outlined-read-only-input"
                   label="Email"
@@ -88,6 +96,7 @@ export default class RegisterStep1 extends Component {
               </Grid>
               <Grid item sm={4} style={styles.grid}>
                 <TextField
+                disabled={this.props.values.deletar}
         
                   floatinglabeltext="Url de Perfil"
                   label="Url de Imagem"
@@ -105,7 +114,9 @@ export default class RegisterStep1 extends Component {
                 />
               </Grid>
               <Grid item sm={6}  >
-                <FormControl variant="outlined" style={{height:'100%',width:'83%'}} >
+                <FormControl variant="outlined" style={{height:'100%',width:'83%'}}
+                disabled={this.props.values.deletar}
+                >
                   <InputLabel id="demo-simple-select-outlined-label">
                     Planos
                   </InputLabel>
@@ -129,6 +140,7 @@ export default class RegisterStep1 extends Component {
               <Grid item sm={6} style={styles.grid}>
                 <TextField
                   required
+                  disabled={this.props.values.deletar}
                   floatinglabeltext="Data de Nascimento"
                   style={{margin:'0px'}}
                   id="outlined-read-only-input"                 
@@ -169,11 +181,12 @@ export default class RegisterStep1 extends Component {
                 </Button>
                 <Button
                   variant="contained"
-                  color="primary"                 
+                  color="primary" 
+                  onClick={this.ClearForm}                
                   style={{
                     width: "10%",
                     marginTop: "10px",
-                    backgroundColor: "rgb(220, 0, 78)",
+                    backgroundColor: "rgba(0, 0, 0, 0.38)",
                   }}
                 >
                   Limpar
