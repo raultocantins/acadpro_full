@@ -41,7 +41,7 @@ export default class Home extends Component {
   }
    constructor(props) {
         super(props)
-        this.Logout = this.Logout.bind(this)
+       this.Logout = this.Logout.bind(this)
        this.registerUser = this.registerUser.bind(this)
        this.openClosed = this.openClosed.bind(this);
        this.handleTitle=this.handleTitle.bind(this)
@@ -52,7 +52,7 @@ export default class Home extends Component {
     componentDidMount() {
       window.location.path='/home'
   
-        Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
+       Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
                 this.setState({ ...this.state.data, data })
