@@ -116,7 +116,7 @@ export default class Home extends Component {
                 {this.state.on ? <MenuIcon /> : <ExpandLessIcon />}
               </IconButton>
         <Typography variant="h4">{this.state.title}</Typography>
-              <Button color="inherit">Logout</Button>
+              <Button color="inherit" onClick={this.Logout}>Logout</Button>
             </Toolbar>
           </AppBar>
         </div>

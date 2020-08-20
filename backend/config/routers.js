@@ -27,7 +27,8 @@ module.exports=app=>{
   // Delete de user
   app.route('/users/:id') 
      .all(app.config.passport.authenticate())
-     .get(admin(app.api.register.user.getUser))  
+     .get(admin(app.api.register.user.getUser))
+     .put(admin(app.api.register.user.save_user))    
      .delete(admin(app.api.register.user.remove))
   //Registro de coachs
   app.route('/coachs')

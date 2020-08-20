@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Axios from 'axios'
 import React from "react";
 import Step1 from "./RegisterStep1";
 import Step2 from "./RegisterStep2";
@@ -25,14 +26,7 @@ export default class Registerusers extends Component{
   url:'',
     page:0,
     rowsPerPage:5,
-  data:[
-    {id:1,name:'Cupcake teste',days:90,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
-    {id:2,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
-    {id:3,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
-    {id:4,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
-    {id:5,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
-    {id:6,name:'Cupcake',days:30,weight:80,height:1.99,url:'www.faceboo.com/imagens',fat:40,pressure:12.8,birth:'10/02/1990',number:63992086480,email:'alexbraul.ar@gmail.com'},
-    ]
+  data:[]
   }
 constructor(props){
   super(props)
@@ -47,13 +41,20 @@ this.DeleteUser=this.DeleteUser.bind(this)
 this.ClearForm=this.ClearForm.bind(this)
 
 }  
-componentDidMount(){
-  api.get('/users')
+componentDidMount(){ 
+ 
+api.get('/users',{},api.headers)
   .then(res=>{
 this.setState({data:res.data})
+
   })
   .catch(err=>{
-    console.log(err)
+    if(err.response){
+
+      alert(err.response.data)
+    }else{
+      console.log(err)
+    }
   })
 }
 
@@ -119,12 +120,21 @@ RegisterUser(){
     height:height,
     number:number
   }
-  api.post('/users',dataUser)
+  api.post('/users',dataUser,api.headers)
 .then(res=>{
 alert('cadastrado com sucesso ')
+this.componentDidMount()
+this.ClearForm()
 })
 .catch(err=>{
-alert('erro ao cadastrar')
+if(err.response){
+  alert(err.response.data)
+}else{
+  alert('erro ao cadastrar')
+  console.log(err)
+
+}
+
 })
 
 }
@@ -143,9 +153,11 @@ AlterUser(){
     number:number
   }
   if(id){
-    api.put(`/users/${id}`,dataUser)
+    api.put(`/users/${id}`,dataUser,api.headers)
     .then(res=>{
     alert('Alterado com sucesso')
+    this.componentDidMount()
+    this.ClearForm()
     })
     .catch(err=>{  
       alert('Não foi possivel alterar')  
@@ -161,11 +173,13 @@ DeleteUser(){
     api.delete(`/users/${this.state.id}`)
     .then(res=>{
       alert('usuario deletado com sucesso')
+      this.ClearForm()
     })
     .catch(err=>{
       alert(err)
     })
   }
+
 }
 ClearForm(){
   this.setState({

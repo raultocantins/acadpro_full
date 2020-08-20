@@ -47,8 +47,10 @@ export default class Signin extends Component {
                 .then(res => {
                     var token = JSON.stringify(res.data)
                     var tokenJSON = JSON.parse(token)
-                    window.localStorage.setItem('logToken', token)
-                    api.defaults.headers.common['Authorization'] = `Bearer ${tokenJSON.token}`;
+                    window.localStorage.setItem('logToken', token)                    
+                    api.headers= {
+                        'Authorization': `Bearer ${tokenJSON.token}` 
+                    };
                     this.props.history.push("/home");
 
                 })

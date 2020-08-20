@@ -23,7 +23,7 @@ export default class Verif extends Component {
     register(e) {
         e.preventDefault()
         const { name, email, facebook, number, instagram, kit, cep, url, password, confirmPassword } = this.props.values
-        const user = { name, email, facebook, number, instagram, kit, cep, url, password, confirmPassword }
+        const user = { name, email, number, kit, cep, url, password, confirmPassword }
         Axios.post('http://localhost:4000/signup', user)
             .then(res => {
                 this.props.nextStep()
