@@ -33,7 +33,8 @@ export default class Verif extends Component {
                     this.setState({ message: err.response.data })
 
                 }else{
-                    alert('Não foi possivel conectar ao servidor, Por favor Tente mais tarde!')
+                    this.setState({ message: 'Não foi possivel conectar ao servidor, Por favor Tente mais tarde!' })
+                    
                 }           
             })
     }
@@ -51,14 +52,8 @@ export default class Verif extends Component {
             },
             buttonPrev: {
                 marginTop: '40px', marginBottom: "40px"
-            },
-
-            typography: {
-                padding: '10px',color:'#fff'
-            },
-                       grid:{
-                display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
-            }
+            }           
+                      
         }
 
         const { name, email, facebook, number, instagram, kit, cep, url, step } = this.props.values
@@ -73,58 +68,58 @@ export default class Verif extends Component {
                 <div style={styles.div} className="container">
                    
                     <Box boxShadow={0}>
-                    <Grid container alignItems='center' alignContent='center' justify='center' className="grid"  >
+                    <Grid container alignItems='center' alignContent='center' justify='center' className="gridbox"  >
                             <Grid item sm={12}  xs={12}>
                                 <Paper elevation={10} className='paper-title'>
-                                    <Typography variant='h4' align='center' style={styles.typography} color='primary'>
+                                    <Typography variant='h4' align='center' className='typography'  >
                                         Verificação de Dados
                         </Typography>
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                            <Collapse in={this.state.message}>
-                        <Alert color='error'>
+                            <Collapse in={this.state.message} style={{display:'flex',justifyContent:'center',alignItems:'center'}} >
+                        <Alert color='error' onClose={()=>this.setState({message:''})} >
                            {this.state.message}
                           </Alert>
-                    </Collapse>
+                    </Collapse> 
 
                             </Grid>
-                            <Grid item xs={6} style={styles.grid} sm={6}>
+                            <Grid item xs={6} className='grid-flex' sm={6}>
                                 <List >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Nome" secondary={name} />
                                     </ListItem >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Email" secondary={email} />
                                     </ListItem >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Facebook" secondary={facebook} />
                                     </ListItem >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Telefone" secondary={number} />
                                     </ListItem >
                                 </List>
 
                             </Grid>
-                            <Grid items xs={6} sm={6} style={styles.grid}>
+                            <Grid items xs={6} sm={6} className='grid-flex'>
                                 <List>
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Instagram" secondary={instagram} />
                                     </ListItem >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Cep" secondary={cep} />
                                     </ListItem >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Logo" secondary={url} />
                                     </ListItem >
-                                    <ListItem  >
+                                    <ListItem  style={{margin:'10px'}} >
                                         <ListItemText primary="Plano" secondary={kit} />
                                     </ListItem >
 
                                 </List>
 
                             </Grid>
-                            <Grid item sm={12} style={styles.grid}>
+                            <Grid item sm={12} className='grid-flex'>
                                 <Button variant="contained" color="primary" onClick={this.register}
                                     style={styles.buttonNext}
                                 >

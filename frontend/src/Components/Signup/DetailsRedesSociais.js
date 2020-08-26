@@ -39,31 +39,17 @@ export default class DetailsRedesSociais extends Component {
     }
 
 
-
-
-
-
     render() {
-        const styles = {
+        const styles = {        
            
-            textfield: {
-                marginTop: '40px'
-            },
             buttonNext: {
                 marginTop: '40px', marginRight: '5px', marginBottom: "40px"
             },
             buttonPrev: {
                 marginTop: '40px', marginBottom: "40px"
-            },
-            typography: {
-                padding: '10px',color:'#fff'
-            },
+            }        
          
-            grid:{
-                display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"
-            }
         }
-
         const { facebook, number, instagram, cep, step } = this.props.values
         const { progressBar } = this.props
 
@@ -76,19 +62,19 @@ export default class DetailsRedesSociais extends Component {
 <div className="background">
 <div style={styles.div} className="container">
 <Box boxShadow={0}>
-                <Grid container sm={12} alignItems='center' alignContent='between' justify='center' className="grid">
+                <Grid container sm={12} alignItems='center' alignContent='between' justify='center' className="gridbox">
                     <Grid item sm={12}  xs={12}>
                         <Paper elevation={10} className='paper-title'>
-                            <Typography variant='h4' align='center' style={styles.typography} color='primary'>
+                            <Typography variant='h4' align='center' className='typography' >
                                 Redes Sociais
                         </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item sm={6} style={styles.grid}>
+                    <Grid item sm={6} className='grid-flex'>
                         <TextField
 
                             label="Facebook"
-                            floatinglabeltext="Facebook" style={styles.textfield} defaultValue={facebook}
+                            floatinglabeltext="Facebook"  className='textfield' defaultValue={facebook}
                             onChange={this.props.handleChange('facebook')}
                             id="outlined-read-only-input"
                             helperText="Insira seu facebook"
@@ -96,10 +82,10 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item sm={6} style={styles.grid}>
+                    <Grid item sm={6} className='grid-flex'>
                         <TextField
                             label="Instagram"
-                            floatinglabeltext="Instagram" style={styles.textfield} defaultValue={instagram}
+                            floatinglabeltext="Instagram"  className='textfield' defaultValue={instagram}
                             onChange={this.props.handleChange('instagram')}
                             id="outlined-read-only-input"
                             helperText="Insira seu instagram"
@@ -108,11 +94,11 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item sm={6} style={styles.grid}>
+                    <Grid item sm={6} className='grid-flex'>
                         <TextField
                             required
                             label="Telefone"
-                            floatinglabeltext="Telefone" style={styles.textfield} defaultValue={number}
+                            floatinglabeltext="Telefone"  className='textfield' defaultValue={number}
                             onChange={this.props.handleChange('number')}
                             id="outlined-read-only-input"
                             variant="outlined"
@@ -121,11 +107,11 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item sm={6}style={styles.grid}>
+                    <Grid item sm={6}className='grid-flex'>
                         <TextField
                             required
                             label="Cep"
-                            floatinglabeltext="Cep" style={styles.textfield} defaultValue={cep}
+                            floatinglabeltext="Cep"  className='textfield' defaultValue={cep}
                             onChange={this.props.handleChange('cep')}
                             id="outlined-read-only-input"
                             variant="outlined"
@@ -134,7 +120,7 @@ export default class DetailsRedesSociais extends Component {
                         />
 
                     </Grid>
-                    <Grid item xs={12} style={styles.grid}>
+                    <Grid item xs={12} className='grid-flex'>
                         <Button item xs={6} variant="contained" color="primary" onClick={this.continue}
                             style={styles.buttonNext}
                         >

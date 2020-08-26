@@ -1,9 +1,8 @@
 import { Component } from "react";
-import Axios from 'axios'
 import React from "react";
 import Step1 from "./RegisterStep1";
 import Step2 from "./RegisterStep2";
-import api from '../../../api'
+import api from '../../../config/api'
 import "./RegisterUsers.css";
 import MaterialTable from 'material-table';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';

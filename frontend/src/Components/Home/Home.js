@@ -18,7 +18,7 @@ import Dashboard from './Content/Dashboard'
 import Busines from './Content/Busines'
 import Users from './Content/Users'
 import User from './Content/User'
-import api from '../../api'
+import api from '../../config/api'
 import Axios from 'axios'
 import './Home.css'
 export default class Home extends Component {

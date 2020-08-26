@@ -38,25 +38,14 @@ export default class DetailsPersonal extends Component {
   };
 
   render() {
-    const styles = {
-      textfield: {
-        marginTop: "40px",
-      },
+    const styles = {   
       button: {
         marginTop: "40px",
         marginBottom: "40px",
-      },
-      typography: {
-        padding: "10px",
-        color: "#fff",
-      },
+      }
+     
     
-      grid: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-      },
+    
     };
     const { name, email, password, confirmPassword, step } = this.props.values;
     const { progressBar } = this.props;
@@ -71,20 +60,20 @@ export default class DetailsPersonal extends Component {
                 alignItems="center"
                 alignContent="stretch"
                 justify="center"
-                className="grid"
+                className="gridbox"
               >
                 <Grid item sm={12} xs={12}>
                   <Paper elevation={10} className="paper-title">
                     <Typography
                       variant="h4"
                       align="center"
-                      style={styles.typography}
+                      className='typography'
                     >
                       Detalhes Pessoais
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item sm={6} style={styles.grid}>
+                <Grid item sm={6} className='grid-flex'>
                   <TextField
                     required
                     id="outlined-read-only-input"
@@ -92,7 +81,7 @@ export default class DetailsPersonal extends Component {
                     defaultValue={name}
                     onChange={this.props.handleChange("name")}
                     variant="outlined"
-                    style={styles.textfield}
+                    className='textfield'
                     floatinglabeltext="Nome"
                     error={this.state.nameError}
                     helperText={
@@ -102,11 +91,11 @@ export default class DetailsPersonal extends Component {
                     }
                   />
                 </Grid>
-                <Grid item sm={6} style={styles.grid}>
+                <Grid item sm={6} className='grid-flex'>
                   <TextField
                     required
                     floatinglabeltext="Email"
-                    style={styles.textfield}
+                    className='textfield'
                     id="outlined-read-only-input"
                     label="Email"
                     type="email"
@@ -121,12 +110,12 @@ export default class DetailsPersonal extends Component {
                     error={this.state.emailError}
                   />
                 </Grid>
-                <Grid item sm={6} style={styles.grid}>
+                <Grid item sm={6} className='grid-flex'>
                   <TextField
                     required
                     label="Senha"
                     floatinglabeltext="Senha"
-                    style={styles.textfield}
+                    className='textfield'
                     defaultValue={password}
                     onChange={this.props.handleChange("password")}
                     type="password"
@@ -140,12 +129,12 @@ export default class DetailsPersonal extends Component {
                     error={this.state.passwordError}
                   />
                 </Grid>
-                <Grid item sm={6} style={styles.grid}>
+                <Grid item sm={6} className='grid-flex'>
                   <TextField
                     required
                     label="Confirmação de senha"
                     floatinglabeltext="Confirmação de senha"
-                    style={styles.textfield}
+                    className='textfield'
                     defaultValue={confirmPassword}
                     onChange={this.props.handleChange("confirmPassword")}
                     type="password"
@@ -159,7 +148,7 @@ export default class DetailsPersonal extends Component {
                     error={this.state.confirmPasswordError}
                   />
                 </Grid>
-                <Grid item xs={12} style={styles.grid}>
+                <Grid item xs={12} className='grid-flex'>
                   <Button
                     item
                     sm={6}

@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
 import iconRegister from '../../assets/icons8-gym-48.png'
-import api from '../../api'
+import api from '../../config/api'
 
 import {
     Link

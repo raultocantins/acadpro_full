@@ -2,7 +2,6 @@ import { Component } from 'react'
 import React from 'react';
 import DetailsRedesSocias from './DetailsRedesSociais'
 import DetailsPersonal from './DetailsPersonal'
-import Package from './Package'
 import Success from './Success'
 import Verif from './Verif'
 export default class Signup extends Component {
@@ -15,7 +14,7 @@ export default class Signup extends Component {
         facebook: "",
         number: "",
         instagram: "",
-        kit: "",
+        kit: "free",
         cep: "",
         url: "",
         progress: '0'
@@ -44,8 +43,8 @@ export default class Signup extends Component {
     }
     render() {
 
-        const { step, name, email, password, confirmPassword, facebook, number, instagram, kit, cep, url } = this.state
-        const values = { step, name, email, password, confirmPassword, facebook, number, instagram, kit, cep, url }
+        const { step, name, email, password, confirmPassword, facebook, number, instagram,cep, url } = this.state
+        const values = { step, name, email, password, confirmPassword, facebook, number, instagram, cep, url }
 
 
 
@@ -68,16 +67,8 @@ export default class Signup extends Component {
                 progressBar={this.progressBar}
 
             />)
-
-            case 3: return (<Package
-                nextStep={this.nextStep}
-                prevStep={this.prevStep}
-                handleChange={this.handleChange}
-                values={values}
-                progressBar={this.progressBar}
-
-            />)
-            case 4: return (<Verif
+            
+            case 3: return (<Verif
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
                 values={values}
@@ -85,7 +76,7 @@ export default class Signup extends Component {
 
             />)
 
-            case 5: return (
+            case 4: return (
                 <Success
                     progressBar={this.progressBar}
                     step={this.state.step}

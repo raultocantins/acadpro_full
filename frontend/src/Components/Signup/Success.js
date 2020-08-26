@@ -12,10 +12,7 @@ export default class Success extends Component {
 
     render() {
         const styles = {           
-            typography: {
-                padding: '10px',color:'#fff'
-            },
-                       sucesso: {
+                                  sucesso: {
                 width: '100%',
                 height: "300px",
                 marginTop: "40px",
@@ -32,10 +29,10 @@ export default class Success extends Component {
 
          
             <div style={styles.div} className="container">
-                <Grid container alignItems='center' alignContent='center' justify='center' className="grid">
+                <Grid container alignItems='center' alignContent='center' justify='center' className="gridbox">
                     <Grid item xs={12}>
                         <Paper elevation={10} className='paper-title'>
-                            <Typography variant='h4' align='center' style={styles.typography} color='primary'>
+                            <Typography variant='h4' align='center' className='typography' >
                                 Cadastro finalizado com sucesso
                 </Typography>
                         </Paper>

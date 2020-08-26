@@ -18,14 +18,21 @@
     height: 100vh;
   
 }
-.grid{
+.gridbox{
     height: 100%!important;
     width: 100%!important;
     align-content: stretch;
-   
-   
+    display: flex;
+    justify-content: center;
+    align-items: center;   
  
    
+}
+.grid-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 .paper-title{
     background-color: #3f51b5!important;
@@ -44,6 +51,19 @@
     height:20px!important;
   
 }
+.typography{
+    padding: 10px;
+    color: #fff
+}
+.textfield{
+margin-top: 40px;    
+}
+
+
+
+
+
+
 
 @media (max-width:500px){
     .container{

@@ -1,8 +1,8 @@
 import React from "react";
-import Signup from "./Components/Signup/Signup";
-import Signin from "./Components/Signin/Signin";
-import LandingPage from "./Components/LandingPage/LandingPage";
-import Home from "./Components/Home/Home";
+import Signup from "../Components/Signup/Signup";
+import Signin from "../Components/Signin/Signin";
+import LandingPage from "../Components/LandingPage/LandingPage";
+import Home from "../Components/Home/Home";
 import { isAuthenticate } from "./auth";
 import {
   BrowserRouter as Router,
