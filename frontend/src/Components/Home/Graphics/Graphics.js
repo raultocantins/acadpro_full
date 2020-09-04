@@ -52,7 +52,7 @@ export default class Graphics extends Component {
 
   render() {
     return (
-      <Paper elevation={0}>
+      <Paper elevation={1}>
         <div className="graphics">
           <canvas id="lineChart"></canvas>
         </div>

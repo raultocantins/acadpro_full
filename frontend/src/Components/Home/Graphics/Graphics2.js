@@ -43,7 +43,7 @@ export default class Graphics2 extends Component {
 
   render() {
     return (
-      <Paper elevation={0}>
+      <Paper elevation={1}>
         <div className="graphics">
           <canvas id="doughnutChart"></canvas>
         </div>

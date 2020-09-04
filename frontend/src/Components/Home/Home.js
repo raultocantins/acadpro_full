@@ -111,9 +111,10 @@ export default class Home extends Component {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
+              
                 onClick={this.openClosed}
               >
-                {this.state.on ? <MenuIcon /> : <ExpandLessIcon />}
+                {this.state.on ? <MenuIcon  className="iconbutton" /> : <ExpandLessIcon className="iconbutton" />}
               </IconButton>
         <Typography variant="h4">{this.state.title}</Typography>
               <Button color="inherit" onClick={this.Logout}>Logout</Button>
@@ -141,12 +142,11 @@ export default class Home extends Component {
         </div>
            </Router>
         <div className="footer">
-          <Paper elevation={3} style={{ height: "100%",backgroundColor:"#3f51b5"}}>
-            <Typography variant="body1" style={{color:'#fff'}} align="center">
-              {"Copyright © "}
+          <Paper elevation={3} style={{ height: "100%",backgroundColor:"#3f51b5",display:'flex',alignItems:"center",justifyContent:'center'}}>
+            <Typography variant="body1" style={{color:'#fff'}} align="center" className="text-footer">
+              {"Developed by Alex Raul"}
+             
 
-              {new Date().getFullYear()}
-              {"."}
             </Typography>
           </Paper>
         </div>

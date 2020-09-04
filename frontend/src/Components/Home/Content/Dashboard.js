@@ -9,7 +9,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className="container-dashboard">
-        <Grid container sm={12} style={{display:'flex',justifyContent:"space-around",marginTop:'15px',alignItems:'center'}}>
+        <Grid container sm={12} style={{display:'flex',justifyContent:"space-around",marginTop:'20px',alignItems:'center'}}>
           <Grid item sm={5}>
             <Graphics />           
           </Grid>

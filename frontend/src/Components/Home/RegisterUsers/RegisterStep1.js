@@ -41,7 +41,9 @@ export default class RegisterStep1 extends Component {
       },
 
       grid: {
-        display: "flex",
+        display: "flex", 
+        justifyContent:'center'
+           
        
       },
     };
@@ -51,12 +53,11 @@ export default class RegisterStep1 extends Component {
     return (
       <React.Fragment>
         <div>
-          <Box boxShadow={0}>
+          <Box boxShadow={0} style={{marginTop:'20px'}}>
             <Grid
               container
               sm={12}
-              alignItems="center"
-              alignContent="stretch"
+              alignItems="center"             
               justify="center"
               className="grid"
               
@@ -113,8 +114,8 @@ export default class RegisterStep1 extends Component {
                   }              
                 />
               </Grid>
-              <Grid item sm={6}  >
-                <FormControl variant="outlined" style={{height:'100%',width:'83%'}}
+              <Grid item sm={12}  >
+                <FormControl variant="outlined" style={{width:'25%',marginLeft:'50px',marginRight:'102px'}}
                 disabled={this.props.values.deletar}
                 >
                   <InputLabel id="demo-simple-select-outlined-label">
@@ -136,13 +137,11 @@ export default class RegisterStep1 extends Component {
                     <MenuItem value={365}>Anual R$700,00</MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
-              <Grid item sm={6} style={styles.grid}>
                 <TextField
+               
                   required
                   disabled={this.props.values.deletar}
-                  floatinglabeltext="Data de Nascimento"
-                  style={{margin:'0px'}}
+                  floatinglabeltext="Data de Nascimento"                  
                   id="outlined-read-only-input"                 
                   type="date"
                   defaultValue={birth}
@@ -153,7 +152,7 @@ export default class RegisterStep1 extends Component {
                   }           
                   
                 />
-              </Grid>
+              </Grid>            
             
               <Grid
                 item

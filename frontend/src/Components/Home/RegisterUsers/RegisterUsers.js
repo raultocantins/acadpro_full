@@ -21,6 +21,7 @@ export default class Registerusers extends Component{
      weight:'',
     fat:'',
    pressure:'',
+   sexo:'',
    birth:'',
   url:'',
     page:0,
@@ -69,7 +70,7 @@ handleChange = (input) => (e) => {
   this.setState({ [input]: e.target.value });
 };
 EditUser(row){
-  const{name,email,url,days,birth,weight,fat,pressure,height,number,id}=row
+  const{name,email,url,days,birth,weight,fat,pressure,height,number,id,sexo}=row
 this.setState({ 
   id:id,
 name:name,
@@ -79,7 +80,7 @@ url:url,
 days:days,
 weight:weight,
 fat:fat,
-pressure:pressure,
+sexo:sexo,
 height:height,
 number:number,
 step:2,
@@ -88,7 +89,7 @@ deletar:false
 
 }
 RemoveUser(row){
-  const{name,email,url,days,birth,weight,fat,pressure,height,number,id}=row
+  const{name,email,url,days,birth,weight,fat,pressure,height,number,id,sexo}=row
   this.setState({
     id:id, 
   name:name,
@@ -98,7 +99,7 @@ RemoveUser(row){
   days:days,
   weight:weight,
   fat:fat,
-  pressure:pressure,
+ sexo:sexo,
   height:height,
   number:number,
   step:2,
@@ -106,7 +107,7 @@ RemoveUser(row){
   })
 }
 RegisterUser(){
-  const {name,email,birth,url,days,weight,fat,pressure,number,height}=this.state
+  const {name,email,birth,url,days,weight,fat,pressure,number,height,sexo}=this.state
   const dataUser={
     name:name,
     email:email,
@@ -115,14 +116,13 @@ RegisterUser(){
     days:days,
     weight:weight,
     fat:fat,
-    pressure:pressure,
+   sexo:sexo,
     height:height,
     number:number
   }
   api.post('/users',dataUser,api.headers)
 .then(res=>{
 alert('cadastrado com sucesso ')
-this.componentDidMount()
 this.ClearForm()
 })
 .catch(err=>{
@@ -138,7 +138,7 @@ if(err.response){
 
 }
 AlterUser(){
-  const {name,email,birth,url,days,weight,fat,pressure,number,height,id}=this.state
+  const {name,email,birth,url,days,weight,fat,pressure,number,height,id,sexo}=this.state
   const dataUser={
     name:name,
     email:email,
@@ -147,15 +147,14 @@ AlterUser(){
     days:days,
     weight:weight,
     fat:fat,
-    pressure:pressure,
+    sexo:sexo,
     height:height,
     number:number
   }
   if(id){
     api.put(`/users/${id}`,dataUser,api.headers)
     .then(res=>{
-    alert('Alterado com sucesso')
-    this.componentDidMount()
+    alert('Alterado com sucesso')  
     this.ClearForm()
     })
     .catch(err=>{  
@@ -189,7 +188,7 @@ ClearForm(){
     days:'',
     weight:'',
     fat:'',
-    pressure:'',
+    sexo:'',
     height:'',
     number:'',
   step:2  })
@@ -197,10 +196,10 @@ ClearForm(){
 }
 
 render(){
-  const {name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar}=this.state
-  const values={name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar}
+  const {name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar,sexo}=this.state
+  const values={name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar,sexo}
   return(
-    <div>
+    <div >
        {this.state.step === 1 ? (
           <Step1
             nextStep={this.nextStep}
@@ -218,8 +217,9 @@ render(){
             AlterUser={this.AlterUser}
             DeleteUser={this.DeleteUser}
             />
-        )}
+        )}           
      <MaterialTable
+     style={{marginTop:'20px'}}
           columns={[
             { title: 'ID', field: 'id' },
             { title: 'Nome', field: 'name' },
@@ -230,7 +230,7 @@ render(){
           
           ]}
           data={this.state.data}
-          title="Demo Title"
+          title="Alunos"
           actions={[
             {
               icon: 'edit',
@@ -244,7 +244,8 @@ render(){
             }
           ]}
         />
-    </div>
+          </div>
+          
   )
 }
   }

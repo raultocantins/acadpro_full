@@ -4,6 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 export default class RegisterStep2 extends Component {
   state = {
     nameError: "",
@@ -48,15 +52,17 @@ DeleteUser(){
 
       grid: {
         display: "flex",
+        justifyContent:'center'
+       
         
       },
     };
-    const { height, weight, fat, pressure, number } = this.props.values;
+    const { height, weight, fat, number,sexo } = this.props.values;
 
     return (
       <React.Fragment>
-        <div>
-          <Box boxShadow={0}>
+        <div >
+          <Box boxShadow={0} style={{marginTop:'20px'}}>
             <Grid
               container
               sm={12}
@@ -129,38 +135,33 @@ DeleteUser(){
                   
                 }}
               >
-                <Grid
-                  item
-                  sm={6}
-                
+                 <Grid item sm={12}  >
+                <FormControl variant="outlined" style={{width:'25%',marginLeft:'50px',marginRight:'102px'}}
+                disabled={this.props.values.deletar}
                 >
-                  <TextField
+                  <InputLabel id="demo-simple-select-outlined-label">
+                   Sexo
+                  </InputLabel>
+                  <Select
+               
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    value={sexo}
+                    onChange={this.props.handleChange("sexo")}
+                    label="Sexo"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value='f'>Feminino</MenuItem>
+                    <MenuItem value='m'>Masculino</MenuItem>
+                    
+                  </Select>
+                </FormControl>
+                <TextField
                     required
                     disabled={this.props.values.deletar}
-                    floatinglabeltext="Pressão"
-                    style={styles.textfield}
-                    id="outlined-read-only-input"
-                    type="text"
-                    defaultValue={pressure}
-                    onChange={this.props.handleChange("pressure")}
-                    variant="outlined"
-                    helperText={
-                      this.state.emailError
-                        ? this.state.emailError
-                        : "Insira a Pressão"
-                    }
-                  />
-                </Grid>
-                <Grid
-                  item
-                  sm={6}
-                  
-                >
-                  <TextField
-                    required
-                    disabled={this.props.values.deletar}
-                    floatinglabeltext="Contato"
-                    style={styles.textfield}
+                    floatinglabeltext="Contato"                  
                     id="outlined-read-only-input"
                     type="text"
                     defaultValue={number}
@@ -172,7 +173,8 @@ DeleteUser(){
                         : "Insira seu Contato de Telefone"
                     }
                   />
-                </Grid>
+              </Grid>
+              
               </Grid>
 
               <Grid
