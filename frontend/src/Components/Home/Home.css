@@ -6,7 +6,7 @@
     width: 100vw;   
     display: grid;
     grid-template-columns: 230px 1fr;
-    grid-template-rows: 70px 1fr 40px;
+    grid-template-rows: 50px 1fr 40px;
     grid-template-areas: 
     "appbar appbar"
     "aside content"
@@ -21,7 +21,7 @@
     width: 100vw;   
     display: grid;
     grid-template-columns: 230px 1fr;
-    grid-template-rows: 70px 1fr 40px;
+    grid-template-rows: 50px 1fr 40px;
     grid-template-areas: 
     "appbar appbar"
     "content content"
@@ -39,12 +39,15 @@
     height: 100%;
     width: 100%;  
     z-index: 1;
+    
 }
+
 .aside{
+   
     grid-area: aside;
     height: 100%;
     width: 100%;
-  
+ 
 
 color: #ffff;
 animation-name: openClosed;
@@ -62,7 +65,7 @@ flex-direction: column;
     height: auto;
     width: 100%;
     overflow-y: auto;
-    background-color: #cbd0e95e;
+    background-color: #fff;
    
     
 }
@@ -90,11 +93,11 @@ animation-duration:2s;
 
 @keyframes openClosed{
     from{
-        width: 0%;
+       
        opacity: 0;
        
     }to{
-        width: 100%;
+        
 opacity: 1;
 
     }

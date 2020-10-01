@@ -52,7 +52,7 @@ export default class Home extends Component {
     componentDidMount() {
       window.location.path='/home'
   
-       Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
+      /* Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
                 this.setState({ ...this.state.data, data })
@@ -62,7 +62,7 @@ export default class Home extends Component {
             .catch(err => {
                 this.props.history.push("/signin");
                 console.log(err)
-            })
+            })*/
     }
     Logout() {
         window.localStorage.removeItem('logToken')
@@ -103,7 +103,7 @@ export default class Home extends Component {
         return ( 
              <div className={this.state.on?'container-home-closed':'container-home-open'}>
         <div className="appbar">
-          <AppBar position="static" style={{ height: "100%" }}>
+          <AppBar position="static" style={{ height: "100%",boxShadow:"none",backgroundColor:"#263238" }}>
             <Toolbar
               style={{ display: "flex", justifyContent: "space-between" }}
             >
@@ -116,7 +116,7 @@ export default class Home extends Component {
               >
                 {this.state.on ? <MenuIcon  className="iconbutton" /> : <ExpandLessIcon className="iconbutton" />}
               </IconButton>
-        <Typography variant="h4">{this.state.title}</Typography>
+        <Typography variant="h5">{this.state.title}</Typography>
               <Button color="inherit" onClick={this.Logout}>Logout</Button>
             </Toolbar>
           </AppBar>
@@ -142,7 +142,7 @@ export default class Home extends Component {
         </div>
            </Router>
         <div className="footer">
-          <Paper elevation={3} style={{ height: "100%",backgroundColor:"#3f51b5",display:'flex',alignItems:"center",justifyContent:'center'}}>
+          <Paper elevation={3} style={{ height: "100%",backgroundColor:"#263238",display:'flex',alignItems:"center",justifyContent:'center'}}>
             <Typography variant="body1" style={{color:'#fff'}} align="center" className="text-footer">
               {"Developed by Alex Raul"}
              

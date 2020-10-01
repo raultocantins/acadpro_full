@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import Grid from '@material-ui/core/Grid'
-import sucesso from '../../assets/sucesso.svg'
-import Button from '@material-ui/core/Button'
+import sucesso from '../../assets/winner.svg'
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import './index.css'
 import {
     Link
@@ -12,7 +12,7 @@ export default class Success extends Component {
 
     render() {
         const styles = {           
-                                  sucesso: {
+                     sucesso: {
                 width: '100%',
                 height: "300px",
                 marginTop: "40px",
@@ -30,25 +30,26 @@ export default class Success extends Component {
          
             <div style={styles.div} className="container">
                 <Grid container alignItems='center' alignContent='center' justify='center' className="gridbox">
-                    <Grid item xs={12}>
-                        <Paper elevation={10} className='paper-title'>
-                            <Typography variant='h4' align='center' className='typography' >
-                                Cadastro finalizado com sucesso
+                    <Grid item xs={12}>                       
+                            <Typography variant='h5' align='center' className='typography' >
+                                Cadastro Finalizado Com Sucesso <VerifiedUserIcon/>
                 </Typography>
-                        </Paper>
+                <Typography variant='h6' align='center' className='typography' >
+                               Para acessar a plataforma clique na imagem abaixo.
+                             
+                </Typography> 
+                     
                     </Grid>
                     <Grid item xs={12} alignItems='center' justify='center' alignContent='center'>
+                    <Link to="/signin" style={styles.link} className="sucesso">
                         <img src={sucesso} alt="sucesso" style={styles.sucesso} />
-                    </Grid>
-                    <Grid item xs={12}  >
-                        <Button variant="contained" color="primary" style={styles.buttonSignin}>
-                            <Link to="/signin" style={styles.link}>
-                                Fazer Login
-                            </Link>
-                        </Button>
-                    </Grid>
-                    
+                        </Link>
+                    </Grid>                    
+                    <Typography variant='h7' align='center' className='typography' >
+                    © Copyright AcadPro {new Date().getFullYear()} <FitnessCenterIcon/>
+                </Typography>
                 </Grid>
+             
             </div>
             </div>
 

@@ -5,9 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
+import loading from '../../assets/load.gif'
 export default class DetailsPersonal extends Component {
   state = {
     nameError: "",
@@ -16,8 +15,12 @@ export default class DetailsPersonal extends Component {
     passwordError: "",
   };
   continue = (e) => {
+    var loading_img=document.getElementsByClassName("loading")
+    var btn_loading=document.getElementsByClassName('btn_loading')   
+ 
     e.preventDefault();
-    const { name, email, password, confirmPassword } = this.props.values;
+    
+    const { name, email, password, confirmPassword,cod } = this.props.values;
     this.setState({
       nameError: "",
       emailError: "",
@@ -26,14 +29,23 @@ export default class DetailsPersonal extends Component {
     });
     if (name.length < 10) {
       this.setState({ nameError: "Nome inválido" });
+      
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       this.setState({ emailError: "Email inválido" });
+      
     } else if (!password || password.length < 8) {
       this.setState({ passwordError: "Senha inválida" });
+      
     } else if (password !== confirmPassword) {
       this.setState({ confirmPasswordError: "Senhas não conferem" });
+     
     } else {
-      this.props.nextStep();
+      btn_loading[0].setAttribute("style","display:none")
+      loading_img[0].setAttribute("style","display:inline-flex")     
+      setTimeout(()=>{
+        this.props.nextStep();
+      },1000)
+     
     }
   };
 
@@ -48,30 +60,27 @@ export default class DetailsPersonal extends Component {
     
     };
     const { name, email, password, confirmPassword, step } = this.props.values;
-    const { progressBar } = this.props;
+    
     return (
       <React.Fragment>
+       
         <div className="background">
-          <div className="container">
+          <div className="container">         
             <Box boxShadow={0}>
               <Grid
                 container
-                sm={12}
-                alignItems="center"
-                alignContent="stretch"
+                sm={12}              
                 justify="center"
                 className="gridbox"
               >
-                <Grid item sm={12} xs={12}>
-                  <Paper elevation={10} className="paper-title">
-                    <Typography
-                      variant="h4"
+                <Grid item sm={12} xs={12} >                  
+                    <Typography                     
                       align="center"
+                      variant="h5"
                       className='typography'
                     >
                       Detalhes Pessoais
-                    </Typography>
-                  </Paper>
+                    </Typography>                 
                 </Grid>
                 <Grid item sm={6} className='grid-flex'>
                   <TextField
@@ -149,25 +158,20 @@ export default class DetailsPersonal extends Component {
                   />
                 </Grid>
                 <Grid item xs={12} className='grid-flex'>
+               <img src={loading} alt="loading" className="loading" />
                   <Button
                     item
                     sm={6}
                     variant="contained"
                     color="primary"
                     onClick={this.continue}
-                    
+                    className="btn_loading"
                     style={styles.button}
                   >
-                    Próximo
+                   Próximo
                   </Button>
                 </Grid>
-                <Grid item md={12}>
-                  <LinearProgress
-                    variant="determinate"
-                    value={progressBar(step)}
-                    className='progressBar'
-                  />
-                </Grid>
+               
               </Grid>
             </Box>
           </div>
