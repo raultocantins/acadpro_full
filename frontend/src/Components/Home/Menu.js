@@ -19,7 +19,7 @@ constructor(props){
 
   render(){   
   return (
-    <MenuList>
+    <MenuList style={{border:"none!important"}}>
       <Link to="/home/dashboard" style={{outline:'none',textDecoration:"none"}} onClick={()=>this.props.handleTitle('Dashboard')}>
         <MenuItem>
           <ListItemIcon style={{height:'100%',width:'100%',display:'flex',alignItems:'center',justifyContent:"left",marginBottom:'20px'}}>

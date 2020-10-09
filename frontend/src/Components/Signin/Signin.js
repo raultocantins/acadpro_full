@@ -66,12 +66,25 @@ var low_text=e.target.value.toLowerCase()
         .catch((err) => {
           loading_img[0].setAttribute("style", "display:none");
           btns_verif[0].setAttribute("style", "display:inline-flex");
-          // this.setState({ error: err.response.data }) })
-          this.setState({
-            error: "Servidor indisponivel no momento, tente mais tarde.",
-          });
+          if(err.response.data){
+            this.setState({ error: err.response.data }) 
+          }else{
+            this.setState({
+              error: "Servidor indisponivel no momento, tente mais tarde.",
+            });
+          }
         });
     }
+  }
+  componentDidMount(){
+    
+    var root=document.getElementsByClassName('container-signin')
+    root[0].addEventListener("keypress",(e)=>{
+      if(e.key=="Enter"){
+        this.validation()
+      }
+      
+    })
   }
   render() {
     return (

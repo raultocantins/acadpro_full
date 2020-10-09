@@ -29,14 +29,12 @@ export default class Verif extends Component {
     const {
       name,
       email, 
-      password,
-      confirmPassword,
+      password     
     } = this.props.values;
     const user = {
       name,
       email,      
-      password,
-      confirmPassword,
+      password      
     };
     Axios.post("http://localhost:4000/signup", user)
       .then((res) => {
@@ -46,7 +44,8 @@ export default class Verif extends Component {
         loading_img[0].setAttribute("style","display:none")
     btns_verif[0].setAttribute("style","display:inline-flex")
         if (err.response) {
-          this.setState({ message: err.response.data });
+          console.log(err.response)
+        //  this.setState({ message: err.response.data });
         } else {
           this.setState({
             message:
@@ -65,12 +64,12 @@ export default class Verif extends Component {
   render() {
     const styles = {
       buttonNext: {
-        marginTop: "40px",
+        marginTop: "20px",
         marginRight: "5px",
         marginBottom: "40px",
       },
       buttonPrev: {
-        marginTop: "40px",
+        marginTop: "20px",
         marginBottom: "40px",
       },
     };
@@ -140,6 +139,7 @@ export default class Verif extends Component {
                     label="Código"
                     floatinglabeltext="cod"
                     className='textfield'
+                    
                     defaultValue={456123}                    
                     type="number"
                     id="outlined-read-only-input"

@@ -9,7 +9,6 @@ consign()
   .then('./api/auth.js')
   .then('./api/register/gym.js')
   .then('./api/register/user.js')
-  .then('./api/register/coach.js')
   .then('./config/routers.js')
   .into(app);
 

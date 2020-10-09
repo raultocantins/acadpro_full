@@ -17,29 +17,19 @@ module.exports=app=>{
    //alteração de academia
    app.route('/gym/:id')
       .all(app.config.passport.authenticate())
-      .put(admin(app.api.register.gym.save))
+      .put(app.api.register.gym.save)
 
    // registro de alunos
   app.route('/users')
      .all(app.config.passport.authenticate())
-     .post(admin(app.api.register.user.save_user))
-     .get(admin(app.api.register.user.get_users))
+     .post(app.api.register.user.save_user)
+     .get(app.api.register.user.get_users)
   // Delete de user
   app.route('/users/:id') 
      .all(app.config.passport.authenticate())
-     .get(admin(app.api.register.user.getUser))
-     .put(admin(app.api.register.user.save_user))    
-     .delete(admin(app.api.register.user.remove))
-  //Registro de coachs
-  app.route('/coachs')
-     .all(app.config.passport.authenticate())
-     .post(admin(app.api.register.coach.save_coach))
-     .get(admin(app.api.register.coach.get_coachs))
-     
-  // Buscar coach por id
-  app.route('/coachs/:id')
-     .all(app.config.passport.authenticate())
-     .get(admin(app.api.register.coach.getCoach))
-     .delete(admin(app.api.register.coach.remove))
+     .get(app.api.register.user.getUser)
+     .put(app.api.register.user.save_user) 
+     .delete(app.api.register.user.remove)
+  
    
 }

@@ -13,13 +13,8 @@ module.exports = app => {
         try {
             existsOrError(user.name, 'Nome não foi informado!')
             existsOrError(user.email, 'E-mail não informado!')
-            existsOrError(user.password, 'Senha não informada!')
-            equalsOrError(user.password, user.confirmPassword, 'Senhas não conferem!')
-            existsOrError(user.number, 'Telefone não informado!')
-            existsOrError(user.cep, 'Cep não informado!')
-            existsOrError(user.kit, "Informe o tipo de Pacote!")           
-        
-
+            existsOrError(user.password, 'Senha não informada!')        
+               
             const userFromDB = await app.db('gym').where({ email: user.email }).first()
             if (!user.id) {
                 notExistsOrError(userFromDB, 'Usuário já cadastrado')
@@ -30,7 +25,6 @@ module.exports = app => {
         }
 
         user.password = encryptPassword(user.password)
-        delete user.confirmPassword
 
         if (user.id ) {
             app.db('gym')
@@ -48,7 +42,6 @@ module.exports = app => {
 
     }
     const remove = async (req, res) => {
-
         try {
             const rowsDelete = await app.db('gym').update({ deletedAt: new Date() }).where({ id: req.user.id })
             existsOrError(rowsDelete, "Usuário não foi encontrado!")

@@ -14,6 +14,7 @@ export default class DetailsPersonal extends Component {
     confirmPasswordError: "",
     passwordError: "",
   };
+  
   continue = (e) => {
     var loading_img=document.getElementsByClassName("loading")
     var btn_loading=document.getElementsByClassName('btn_loading')   
@@ -48,8 +49,19 @@ export default class DetailsPersonal extends Component {
      
     }
   };
+componentDidMount(){
+  var root=document.getElementsByClassName('background')
+  root[0].addEventListener("keypress",(e)=>{
+    if(e.key=="Enter"){
+      this.continue(e)
+    }
+    
+  })
+}
 
+ 
   render() {
+    
     const styles = {   
       button: {
         marginTop: "40px",
@@ -62,9 +74,9 @@ export default class DetailsPersonal extends Component {
     const { name, email, password, confirmPassword, step } = this.props.values;
     
     return (
-      <React.Fragment>
+      <React.Fragment  >
        
-        <div className="background">
+        <div className="background" >
           <div className="container">         
             <Box boxShadow={0}>
               <Grid
@@ -165,6 +177,8 @@ export default class DetailsPersonal extends Component {
                     variant="contained"
                     color="primary"
                     onClick={this.continue}
+                    
+                   
                     className="btn_loading"
                     style={styles.button}
                   >
