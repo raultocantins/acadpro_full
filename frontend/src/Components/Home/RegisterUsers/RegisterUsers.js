@@ -1,251 +1,352 @@
 import { Component } from "react";
 import React from "react";
-import Step1 from "./RegisterStep1";
-import Step2 from "./RegisterStep2";
-import api from '../../../config/api'
+import api from "../../../config/api";
 import "./RegisterUsers.css";
-import MaterialTable from 'material-table';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
-
-export default class Registerusers extends Component{
-  state={
-    id:'',
-    deletar:false,
-    step:1,    
-    name:'',
-    email:'',
-    number:'',
-    days:'',
-    height:'',
-     weight:'',
-    fat:'',
-   pressure:'',
-   sexo:'',
-   birth:'',
-  url:'',
-    page:0,
-    rowsPerPage:5,
-  data:[]
+import MaterialTable from "material-table";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import MenuItem from "@material-ui/core/MenuItem";
+import Loading from '../../../assets/loading.svg'
+export default class Registerusers extends Component {
+  state = {
+    id: "",
+    deletar: false,    
+    name: "",    
+    number: "",
+    days: "",
+    height: "",
+    weight: "",   
+    page: 0,
+    rowsPerPage: 5,
+    data: [],
+  };
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);    
+    this.EditUser = this.EditUser.bind(this);
+    this.RemoveUser = this.RemoveUser.bind(this);
+    this.RegisterUser = this.RegisterUser.bind(this);
+    this.DeleteUser = this.DeleteUser.bind(this);
+    this.ClearForm = this.ClearForm.bind(this);
   }
-constructor(props){
-  super(props)
+  componentDidMount() {
+    api.get("/users", {}, api.headers)
+      .then((res) => {
+        this.setState({ data: res.data });
+      })
+      .catch((err) => {
+        if (err.response) {
+          alert(err.response.data);
+        } else {
+          console.log(err);
+        }
+      });
+  }
 
-this.handleChange=this.handleChange.bind(this)
-this.nextStep=this.nextStep.bind(this)
-this.EditUser=this.EditUser.bind(this)
-this.RemoveUser=this.RemoveUser.bind(this)
-this.RegisterUser=this.RegisterUser.bind(this)
-this.AlterUser=this.AlterUser.bind(this)
-this.DeleteUser=this.DeleteUser.bind(this)
-this.ClearForm=this.ClearForm.bind(this)
+  handleChange = (input) => (e) => {
+    let value=e.target.value.toLowerCase()
+    this.setState({ [input]: value });  
+  };
+  EditUser(row) {
+    const {
+      name,       
+      days,     
+      weight,     
+      height,
+      number,
+      id     
+    } = row;
+    this.setState({
+      id: id,
+      name: name,    
+      days: days,
+      weight: weight,
+     height: height,
+      number: number,
+      deletar: false,
+    });
+  }
+  RemoveUser(row) {
+    const {
+      name,
+         days,
+           weight,
+          height,
+      number,
+      id    
+    } = row;
+    this.setState({
+      id: id,
+      name: name, 
+      days: days,
+      weight: weight,
+      height: height,
+      number: number,
+      deletar: true,
+    });
+  }
 
-}  
-componentDidMount(){ 
- 
-api.get('/users',{},api.headers)
-  .then(res=>{
-this.setState({data:res.data})
-
-  })
-  .catch(err=>{
-    if(err.response){
-
-      alert(err.response.data)
-    }else{
-      console.log(err)
+  RegisterUser() {
+    var load=document.getElementsByClassName('load')
+    const {
+      name,
+      days,
+      weight,     
+      number,
+      height ,
+      id   
+    } = this.state;
+    const dataUser = {
+      name: name,     
+      days: days,
+      weight: weight,     
+      height: height,
+      number: number
+    };
+    if (id) {
+      api.put(`/users/${id}`, dataUser, api.headers)
+        .then((res) => {
+          alert("Alterado com sucesso");
+          this.ClearForm();
+        })
+        .catch((err) => {
+          alert("Não foi possivel alterar");
+        });
+    } else {
+      load[0].setAttribute('style','visibility:visible')
+      api.post("/users", dataUser, api.headers)
+      .then((res) => {
+        load[0].setAttribute('style','visibility:hidden')
+        alert("cadastrado com sucesso ");
+        this.ClearForm();
+      })
+      .catch((err) => {
+        load[0].setAttribute('style','visibility:hidden')
+        if (err.response) {
+          alert(err.response.data);
+        } else {
+          alert("erro ao cadastrar");
+          console.log(err);
+        }
+      });
     }
-  })
-}
 
-nextStep = () => {
-  const { step } = this.state;
-  this.setState({ step: step + 1 });
-};
-prevStep = () => {
-  const { step } = this.state;
-  this.setState({ step: step - 1 });
-};
-handleChange = (input) => (e) => {
-  this.setState({ [input]: e.target.value });
-};
-EditUser(row){
-  const{name,email,url,days,birth,weight,fat,pressure,height,number,id,sexo}=row
-this.setState({ 
-  id:id,
-name:name,
-email:email,
-birth:birth,
-url:url,
-days:days,
-weight:weight,
-fat:fat,
-sexo:sexo,
-height:height,
-number:number,
-step:2,
-deletar:false
-})
 
-}
-RemoveUser(row){
-  const{name,email,url,days,birth,weight,fat,pressure,height,number,id,sexo}=row
-  this.setState({
-    id:id, 
-  name:name,
-  email:email,
-  birth:birth,
-  url:url,
-  days:days,
-  weight:weight,
-  fat:fat,
- sexo:sexo,
-  height:height,
-  number:number,
-  step:2,
-  deletar:true
-  })
-}
-RegisterUser(){
-  const {name,email,birth,url,days,weight,fat,pressure,number,height,sexo}=this.state
-  const dataUser={
-    name:name,
-    email:email,
-    birth:birth,
-    url:url,
-    days:days,
-    weight:weight,
-    fat:fat,
-   sexo:sexo,
-    height:height,
-    number:number
+
+
+
+
+
+  
   }
-  api.post('/users',dataUser,api.headers)
-.then(res=>{
-alert('cadastrado com sucesso ')
-this.ClearForm()
-})
-.catch(err=>{
-if(err.response){
-  alert(err.response.data)
-}else{
-  alert('erro ao cadastrar')
-  console.log(err)
-
-}
-
-})
-
-}
-AlterUser(){
-  const {name,email,birth,url,days,weight,fat,pressure,number,height,id,sexo}=this.state
-  const dataUser={
-    name:name,
-    email:email,
-    birth:birth,
-    url:url,
-    days:days,
-    weight:weight,
-    fat:fat,
-    sexo:sexo,
-    height:height,
-    number:number
+  
+  DeleteUser() {
+    var load=document.getElementsByClassName('load')
+    if (this.state.deletar) {
+      load[0].setAttribute('style','visibility:visible')
+      api.delete(`/users/${this.state.id}`)
+        .then((res) => {
+          load[0].setAttribute('style','visibility:hidden')
+          alert("usuario deletado com sucesso");
+          this.ClearForm();
+        })
+        .catch((err) => {
+          load[0].setAttribute('style','visibility:hidden')
+          alert(`error ao deletar usuario com id ${this.state.id}`);
+        });
+    }
   }
-  if(id){
-    api.put(`/users/${id}`,dataUser,api.headers)
-    .then(res=>{
-    alert('Alterado com sucesso')  
-    this.ClearForm()
-    })
-    .catch(err=>{  
-      alert('Não foi possivel alterar')  
-    })
-  }else{
-    alert('id invalido')
-  }
- 
-}
-DeleteUser(){
-  if(this.state.deletar){
-
-    api.delete(`/users/${this.state.id}`)
-    .then(res=>{
-      alert('usuario deletado com sucesso')
-      this.ClearForm()
-    })
-    .catch(err=>{
-      alert(err)
-    })
+  ClearForm() { 
+      this.setState({
+        name: "",     
+        days: "",
+        weight: "",      
+        height: "",
+        number: "",
+        id:""      
+      }); 
+   
   }
 
-}
-ClearForm(){
-  this.setState({
-    name:'',
-    email:'',
-    birth:'',
-    url:'',
-    days:'',
-    weight:'',
-    fat:'',
-    sexo:'',
-    height:'',
-    number:'',
-  step:2  })
-
-}
-
-render(){
-  const {name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar,sexo}=this.state
-  const values={name,email,number,days,height,weight,fat,pressure,birth,url,id,deletar,sexo}
-  return(
-    <div >
-       {this.state.step === 1 ? (
-          <Step1
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values} 
-           ClearForm={this.ClearForm}
+  render() {
+   
+    
+    return (
+      <div>
+        <div>
+        <img src={Loading} alt="loading" className="load"/>
+          <Box boxShadow={0} style={{ marginTop: "20px" }}>
+           
+            <Grid
+              container
+              sm={12}
+              alignItems="center"
+              justify="center"
+              className="grid"
+            >
+              <Grid item sm={3}>
+                <TextField
+                   id="standard-read-only-input"
+                  label="Nome"
+                  defaultValue={this.state.name}
+                  onChange={this.handleChange("name")}
                   
-          />
-        ) : (
-          <Step2
-            prevStep={this.prevStep}
-            handleChange={this.handleChange}
-            values={values}
-            RegisterUser={this.RegisterUser}
-            AlterUser={this.AlterUser}
-            DeleteUser={this.DeleteUser}
-            />
-        )}           
-     <MaterialTable
-     style={{marginTop:'20px'}}
-          columns={[
-            { title: 'ID', field: 'id' },
-            { title: 'Nome', field: 'name' },
-            { title: 'Plano', field: 'days' },
-            { title: 'Peso', field: 'weight' },
-            { title: 'Altura', field: 'height' },          
+                  floatinglabeltext="Nome"
+                  helperText={
+                    this.state.nameError
+                      ? this.state.nameError
+                      : "Nome completo"
+                  }
+                />
+              </Grid>
+              <Grid item sm={3}>
+                <TextField
+                  
+                  id="standard-read-only-input"
+                  label="Telefone"
+                  defaultValue={this.state.number}
+                  onChange={this.handleChange("number")}
+                  
+                  floatinglabeltext="Telefone"
+                  helperText={
+                    this.state.emailError
+                      ? this.state.emailError
+                      : "Insira seu Telefone"
+                  }
+                />
+              </Grid>
+              <Grid item sm={3}>
+                <TextField
+                  required
+                  id="standard-read-only-input"
+                  label="Peso"
+                  defaultValue={this.state.weight}
+                  onChange={this.handleChange("weight")}
+                 
+                  floatinglabeltext="Peso"
+                  helperText={
+                    this.state.nameError
+                      ? this.state.nameError
+                      : "Insira o peso(kg)"
+                  }
+                />
+              </Grid>
+
+              <Grid item sm={3}>
+                <TextField
+                  required
+                id="standard-read-only-input"
+                  label="Altura"
+                  defaultValue={this.state.height}
+                  onChange={this.handleChange("height")}
+                  
+                  floatinglabeltext="Altura"
+                  helperText={
+                    this.state.nameError
+                      ? this.state.nameError
+                      : "Insira a altura(M)"
+                  }
+                />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              sm={12}
+              alignItems="center"
+              justify="left"
+              className="grid"
+              style={{marginTop:"15px"}}
+            >           
+              <TextField
+              style={{marginRight:'15px',width:"20%"}}
+          id="standard-select-currency"
+          select
+          label="Selecione o Plano"
+          value={this.state.days}
+          onChange={this.handleChange('days')}
+          helperText="Por favor selecione um plano"
+        >
+             <MenuItem value={30}>30 Dias R$70,00</MenuItem>
+                    <MenuItem value={90}>90 Dias R$200,00</MenuItem>
+                    <MenuItem value={365}>Anual R$700,00</MenuItem>
+         
+        </TextField>
             
-          
+            
+                {this.state.deletar ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.DeleteUser}
+                    style={{
+                      width: "10%",                     
+                      marginRight: "5px",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    Deletar
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.RegisterUser}
+                    style={{
+                      width: "10%",                    
+                      marginRight: "5px",
+                      backgroundColor: "rgb(76, 175, 80)",
+                    }}
+                  >
+                    {this.state.id ? "Alterar" : "Cadastrar"}
+                  </Button>
+                )}
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.ClearForm}
+                  style={{
+                    width: "10%",                   
+                    backgroundColor: "rgba(0, 0, 0, 0.38)",
+                  }}
+                >
+                  Limpar
+                </Button>
+              </Grid> 
+
+    
+          </Box>
+        </div>
+        <MaterialTable
+          style={{ marginTop: "20px" }}
+          columns={[
+            { title: "ID", field: "id" },
+            { title: "Nome", field: "name" },
+            { title: "Plano", field: "days" },
+            { title: "Peso", field: "weight" },
+            { title: "Altura", field: "height" },
           ]}
           data={this.state.data}
           title="Alunos"
           actions={[
             {
-              icon: 'edit',
-              tooltip: 'Edit User',
-              onClick:(...data)=>this.EditUser(data[1])
+              icon: "edit",
+              tooltip: "Edit User",
+              onClick: (...data) => this.EditUser(data[1]),
             },
             {
-              icon:()=>{return <DeleteForeverIcon style={{color:'red'}}/>},
-              tooltip: 'Delete user',
-              onClick: (...data)=>this.RemoveUser(data[1])
-            }
+              icon: () => {
+                return <DeleteForeverIcon style={{ color: "red" }} />;
+              },
+              tooltip: "Delete user",
+              onClick: (...data) => this.RemoveUser(data[1]),
+            },
           ]}
         />
-          </div>
-          
-  )
-}
+      </div>
+    );
   }
+}

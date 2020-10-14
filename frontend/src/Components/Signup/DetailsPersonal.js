@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import loading from '../../assets/load.gif'
+import loading from '../../assets/loading.svg'
 export default class DetailsPersonal extends Component {
   state = {
     nameError: "",
@@ -52,7 +52,7 @@ export default class DetailsPersonal extends Component {
 componentDidMount(){
   var root=document.getElementsByClassName('background')
   root[0].addEventListener("keypress",(e)=>{
-    if(e.key=="Enter"){
+    if(e.key==="Enter"){
       this.continue(e)
     }
     

@@ -1,6 +1,6 @@
 import React ,{Component}from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Image from "../../assets/dl.jpg";
+import Image from "../../assets/academia.svg";
 import Typography from "@material-ui/core/Typography";
 import "./Profile.css";
 

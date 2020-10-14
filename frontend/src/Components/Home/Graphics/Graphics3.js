@@ -1,10 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Graphics3.css";
 import MaterialTable from 'material-table';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-export default class Graphics3 extends Component {
+import api from '../../../config/api'
+export default class Graphics3 extends React.Component{
   state={
     data:[]
+  }
+  constructor(props){
+    super(props)
+this.dataExpired=this.dataExpired.bind(this)
+  }
+componentDidMount(){
+  this.dataExpired();
+}
+  dataExpired(){
+api.get('/expired')
+.then(res=>{
+this.setState({data:res.data})
+})
+.catch(err=>{
+console.log(err)
+})
   }
   render() {
     return (

@@ -8,9 +8,9 @@
     grid-template-columns: 230px 1fr;
     grid-template-rows: 65px 1fr 40px;
     grid-template-areas: 
-    "appbar appbar"
+    "aside appbar"
     "aside content"
-    "footer footer"
+    "aside footer"
     ;   
    }
    
@@ -84,8 +84,7 @@ flex-direction: column;
     
 }
 .iconbutton{
-animation-name:iconbtn;
-animation-duration:2s;
+
 
 
 }
@@ -111,18 +110,6 @@ border: none!important;
 
 
 
-
-@keyframes iconbtn{
-    from{
-       color: rgba(255, 255, 255, 0.623);
-opacity:0
-    }
-    to{
-        color: #fff;
-opacity:1;
-
-    }
-}
 @keyframes textfooter{
     from{
    

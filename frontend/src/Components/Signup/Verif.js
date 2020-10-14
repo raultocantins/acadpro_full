@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { List, ListItem, ListItemText } from "@material-ui/core/";
-import loading from '../../assets/load.gif'
+import loading from '../../assets/loading.svg'
 import Box from "@material-ui/core/Box";
 export default class Verif extends Component {
   state = {
@@ -19,7 +19,15 @@ export default class Verif extends Component {
     super(props);
     this.register = this.register.bind(this);
   }
-
+componentDidMount(){
+  var root=document.getElementsByClassName('background')
+  root[0].addEventListener("keypress",(e)=>{
+    if(e.key==="Enter"){
+      this.register(e)
+    }
+    
+  })
+}
   register(e) {
     var loading_img=document.getElementsByClassName("loading")
     var btns_verif=document.getElementsByClassName('btns_verif')  
@@ -76,8 +84,8 @@ export default class Verif extends Component {
 
     const {
       name,
-      email,    
-      step
+      email 
+      
     } = this.props.values;
    
 
@@ -151,8 +159,8 @@ export default class Verif extends Component {
                
                   </List>
                 </Grid>
-                <Grid item sm={12} className="grid-flex loading">
-                <img src={loading} alt="loading" />
+                <Grid item sm={12} className="grid-flex loading" >
+                <img src={loading} alt="loading" style={{height:"100px",width:"100px"}}/>
                 </Grid>
                 <Grid item sm={12} className="grid-flex btns_verif" >               
                   <Button

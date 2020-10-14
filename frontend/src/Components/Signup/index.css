@@ -57,6 +57,8 @@
 }
 .loading{
     display: none;
+    height: 100px;
+    width: 100px;
     
 }
 

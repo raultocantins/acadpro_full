@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Paper from "@material-ui/core/Paper";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,19 +25,15 @@ export default class Home extends Component {
   state = {
     title:'Dashboard',
       on: false,
-      name: 'alex raul santo',
-      email: 'alexbraul.arrr@gmail.com',
+      name: '',
+      email: '',
       password: '',
       confirmPassword: '',
       number: '',
       days: '',
       height: '',
-      weight: '',
-      fat: '',
-      pressure: '',
-      birth: '',
-      url: '',
-      data: {name: 'Sparke Gym'}
+      weight: '',      
+      data: {name: 'AcadPro'}
   }
    constructor(props) {
         super(props)
@@ -52,7 +48,7 @@ export default class Home extends Component {
     componentDidMount() {
       window.location.path='/home'
   
-       Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
+      Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
                 this.setState({ ...this.state.data, data })
@@ -103,7 +99,7 @@ export default class Home extends Component {
         return ( 
              <div className={this.state.on?'container-home-closed':'container-home-open'}>
         <div className="appbar">
-          <AppBar position="static" style={{ height: "100%",boxShadow:"none",backgroundColor:"#3f51b5" }}>
+          <AppBar position="static" style={{ height: "100%",boxShadow:"none",backgroundColor:"#fff",color:"#000" }}>
             <Toolbar
               style={{ display: "flex", justifyContent: "space-between" }}
             >
@@ -114,10 +110,10 @@ export default class Home extends Component {
               
                 onClick={this.openClosed}
               >
-                {this.state.on ? <MenuIcon  className="iconbutton" /> : <ExpandLessIcon className="iconbutton" />}
+                {this.state.on ? <MenuIcon  className="iconbutton" /> : <ArrowBackIosIcon className="iconbutton" />}
               </IconButton>
         <Typography variant="h5">{this.state.title}</Typography>
-              <Button color="inherit" onClick={this.Logout}>Logout</Button>
+              <Button color="inherit" onClick={this.Logout}>Sair</Button>
             </Toolbar>
           </AppBar>
         </div>
@@ -126,7 +122,7 @@ export default class Home extends Component {
           className="aside"
           style={{ display: this.state.on ? "none" : "flex" }}
         >
-          <Paper variant="outlined" square elevation={3} style={{ width: "100%", height: "100%"}} elevation={0}>
+          <Paper variant="outlined" square  style={{ width: "100%", height: "100%"}} elevation={0}>
             <Profile name={this.state.data.name}/>
             <Menu handleTitle={this.handleTitle} title={this.state.title}/>
           </Paper>

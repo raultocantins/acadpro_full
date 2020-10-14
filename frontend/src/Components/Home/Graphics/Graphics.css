@@ -1,6 +1,18 @@
 .graphics {
     font-family: sans-serif;
     text-align: center;
+    height: 100%;
   
   }
   
+  .loadgraf{
+
+    position: absolute;
+    height: 100px;
+    width: 100px; 
+    left: 50%;   
+   top:40%;
+   z-index: 99;  
+   visibility: visible;
+    
+}
