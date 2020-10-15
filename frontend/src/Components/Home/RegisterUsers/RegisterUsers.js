@@ -47,8 +47,8 @@ export default class Registerusers extends Component {
   }
 
   handleChange = (input) => (e) => {
-    let value=e.target.value.toLowerCase()
-    this.setState({ [input]: value });  
+   
+    this.setState({ [input]: e.target.value });  
   };
   EditUser(row) {
     const {
@@ -111,6 +111,7 @@ export default class Registerusers extends Component {
         .then((res) => {
           alert("Alterado com sucesso");
           this.ClearForm();
+          this.componentDidMount()
         })
         .catch((err) => {
           alert("Não foi possivel alterar");
@@ -121,6 +122,7 @@ export default class Registerusers extends Component {
       .then((res) => {
         load[0].setAttribute('style','visibility:hidden')
         alert("cadastrado com sucesso ");
+        this.componentDidMount()
         this.ClearForm();
       })
       .catch((err) => {
@@ -151,6 +153,7 @@ export default class Registerusers extends Component {
         .then((res) => {
           load[0].setAttribute('style','visibility:hidden')
           alert("usuario deletado com sucesso");
+          this.componentDidMount()
           this.ClearForm();
         })
         .catch((err) => {
@@ -168,6 +171,7 @@ export default class Registerusers extends Component {
         number: "",
         id:""      
       }); 
+      this.componentDidMount()
    
   }
 
@@ -192,6 +196,7 @@ export default class Registerusers extends Component {
                    id="standard-read-only-input"
                   label="Nome"
                   defaultValue={this.state.name}
+                  value={this.state.name}
                   onChange={this.handleChange("name")}
                   
                   floatinglabeltext="Nome"
@@ -208,6 +213,7 @@ export default class Registerusers extends Component {
                   id="standard-read-only-input"
                   label="Telefone"
                   defaultValue={this.state.number}
+                  value={this.state.number}
                   onChange={this.handleChange("number")}
                   
                   floatinglabeltext="Telefone"
@@ -223,6 +229,7 @@ export default class Registerusers extends Component {
                   required
                   id="standard-read-only-input"
                   label="Peso"
+                  value={this.state.weight}
                   defaultValue={this.state.weight}
                   onChange={this.handleChange("weight")}
                  
@@ -241,6 +248,7 @@ export default class Registerusers extends Component {
                 id="standard-read-only-input"
                   label="Altura"
                   defaultValue={this.state.height}
+                  value={this.state.height}
                   onChange={this.handleChange("height")}
                   
                   floatinglabeltext="Altura"
@@ -322,8 +330,7 @@ export default class Registerusers extends Component {
         </div>
         <MaterialTable
           style={{ marginTop: "20px" }}
-          columns={[
-            { title: "ID", field: "id" },
+          columns={[           
             { title: "Nome", field: "name" },
             { title: "Plano", field: "days" },
             { title: "Peso", field: "weight" },

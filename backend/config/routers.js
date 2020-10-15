@@ -30,6 +30,7 @@ module.exports=app=>{
      .get(app.api.register.user.getUser)
      .put(app.api.register.user.save_user) 
      .delete(app.api.register.user.remove)
-  
+   app.route('/data')
+   .get(app.api.register.user.data)
    
 }

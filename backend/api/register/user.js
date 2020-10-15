@@ -11,19 +11,13 @@ module.exports = app => {
         if (req.user.id) user.gymId = req.user.id
         if (user) user.createAt = new Date().toLocaleString()
         try {
-            existsOrError(user.name, 'Nome não foi informado!')
-            existsOrError(user.email, 'E-mail não informado!')            
+            existsOrError(user.name, 'Nome não foi informado!')            
             existsOrError(user.number, 'Telefone não informado!')
             existsOrError(user.days, 'Mensalidade não informada!')
             existsOrError(user.height, 'Altura não informada!')
             existsOrError(user.weight, 'Peso não informado!')
-            existsOrError(user.fat, 'Percentual de gordura não informado!')
-            existsOrError(user.pressure, 'Pressão não informada!')
-            existsOrError(user.birth, 'Data de nascimento não informada!')           
-
-
-
-            const userFromDB = await app.db('users') .first() .where({ email: user.email })
+                    
+            const userFromDB = await app.db('users') .first() .where({ number: user.number }) .whereNull('deletedAt')
        
             if (!user.id) {
                 notExistsOrError(userFromDB, 'Usuário já cadastrado')
@@ -50,7 +44,7 @@ module.exports = app => {
     }
     const get_users = (req, res) => {       
         app.db('users')
-            .select('id','name','email','number','days','height','weight','fat','pressure','birth','url','createAt','deletedAt','gymId')
+            .select('id','name','number','days','height','weight','createAt','deletedAt','gymId')
             .where({gymId:req.user.id})
             .whereNull('deletedAt')
             .then(users => {
@@ -70,7 +64,7 @@ module.exports = app => {
     const getUser = async (req, res) => {
 
         app.db('users')
-            .select('id', 'name', 'email', 'facebook', 'number', 'instagram', 'days', 'gymId')
+            .select('id', 'name', 'number', 'days', 'gymId','height','weight')
             .where({ id: req.params.id ,gymId:req.user.id})
             .whereNull('deletedAt')
             .first()
@@ -78,9 +72,17 @@ module.exports = app => {
             .catch(err=>{res.status(500).send(err)})
 
     }
+    const data=async (req,res)=>{
+       // const getmes=new Date().getMonth().toLocaleString()
+             await app.db('users').whereNull('deletedAt').select('createAt')        
+            .then(user => { res.json([user]) })
+            .catch(err=>{res.status(500).send(err)})
+         
+
+    }
 
 
-    return { save_user, get_users, remove, getUser }
+    return { save_user, get_users, remove, getUser,data }
 
 
 }

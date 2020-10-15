@@ -23,7 +23,7 @@ data(){
   load[0].setAttribute('style','visibility:visible')
 api.get('/data')
 .then(res=>{  
-  load[0].setAttribute('style','visibility:hidden')
+  load[0].setAttribute('style','visibility:hidden') 
 this.setState({data:res.data})
 })
 .catch(err=>{

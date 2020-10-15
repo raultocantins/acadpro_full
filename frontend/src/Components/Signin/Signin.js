@@ -10,7 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Alert from "@material-ui/lab/Alert";
 import iconRegister from "../../assets/icons8-gym-48.png";
 import api from "../../config/api";
-import loading from "../../assets/load.gif";
+import loading from "../../assets/loading.svg";
 
 import { Link } from "react-router-dom";
 import "./Signin.css";
