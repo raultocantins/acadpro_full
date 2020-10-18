@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import MenuItem from "@material-ui/core/MenuItem";
 import Loading from '../../../assets/loading.svg'
+import Alert from '../Alert'
 export default class Registerusers extends Component {
   state = {
     id: "",
@@ -22,7 +23,10 @@ export default class Registerusers extends Component {
     page: 0,
     rowsPerPage: 5,
     data: [],
+    success:true,
+    alertMsg:"",    
   };
+
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);    
@@ -31,6 +35,7 @@ export default class Registerusers extends Component {
     this.RegisterUser = this.RegisterUser.bind(this);
     this.DeleteUser = this.DeleteUser.bind(this);
     this.ClearForm = this.ClearForm.bind(this);
+    this.fechar=this.fechar.bind(this)
   }
   componentDidMount() {
     api.get("/users", {}, api.headers)
@@ -50,6 +55,12 @@ export default class Registerusers extends Component {
    
     this.setState({ [input]: e.target.value });  
   };
+  fechar(s){
+    setTimeout(this.setState({
+      success:true,
+    alertMsg:"",
+    }),s)       
+  }
   EditUser(row) {
     const {
       name,       
@@ -109,11 +120,19 @@ export default class Registerusers extends Component {
     if (id) {
       api.put(`/users/${id}`, dataUser, api.headers)
         .then((res) => {
-          alert("Alterado com sucesso");
+          //alert("Alterado com sucesso");
+          this.setState({
+            alertMsg:`${res.data}`,
+            success:true
+          })
           this.ClearForm();
           this.componentDidMount()
         })
         .catch((err) => {
+          this.setState({            
+            alertMsg:`${err.response.data}`,
+            success:false
+          })
           alert("Não foi possivel alterar");
         });
     } else {
@@ -121,27 +140,32 @@ export default class Registerusers extends Component {
       api.post("/users", dataUser, api.headers)
       .then((res) => {
         load[0].setAttribute('style','visibility:hidden')
-        alert("cadastrado com sucesso ");
+        this.setState({
+          alertMsg:`${res.data}`,
+          success:true
+        })
+        //alert("cadastrado com sucesso ");
         this.componentDidMount()
         this.ClearForm();
       })
       .catch((err) => {
         load[0].setAttribute('style','visibility:hidden')
         if (err.response) {
-          alert(err.response.data);
+          //alert(err.response.data);
+          this.setState({
+            alertMsg:`${err.response.data}`,
+            success:false,         
+          })
         } else {
-          alert("erro ao cadastrar");
-          console.log(err);
+          this.setState({
+            alertMsg:`${err.response}`,
+            success:false,         
+          })
+         // alert("erro ao cadastrar");
+         // console.log(err);
         }
       });
     }
-
-
-
-
-
-
-
   
   }
   
@@ -180,6 +204,7 @@ export default class Registerusers extends Component {
     
     return (
       <div>
+         <Alert msg={this.state.alertMsg} success={this.state.success} fechar={this.fechar}/>
         <div>
         <img src={Loading} alt="loading" className="load"/>
           <Box boxShadow={0} style={{ marginTop: "20px" }}>

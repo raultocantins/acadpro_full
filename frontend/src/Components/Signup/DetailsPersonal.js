@@ -77,6 +77,7 @@ componentDidMount(){
       <React.Fragment  >
        
         <div className="background" >
+
           <div className="container">         
             <Box boxShadow={0}>
               <Grid
@@ -189,7 +190,8 @@ componentDidMount(){
               </Grid>
             </Box>
           </div>
-        </div>
+                  </div>
+       
       </React.Fragment>
     );
   }

@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Paper from "@material-ui/core/Paper";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,7 +33,7 @@ export default class Home extends Component {
       number: '',
       days: '',
       height: '',
-      weight: '',      
+      weight: '',           
       data: {name: 'AcadPro'}
   }
    constructor(props) {
@@ -48,7 +49,7 @@ export default class Home extends Component {
     componentDidMount() {
       window.location.path='/home'
   
-      Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
+      /*Axios.post('http://localhost:4000/validateToken', JSON.parse(window.localStorage.getItem('logToken')))
             .then((res) => {
                 var data = res.data
                 this.setState({ ...this.state.data, data })
@@ -58,7 +59,7 @@ export default class Home extends Component {
             .catch(err => {
                 this.props.history.push("/signin");
                 console.log(err)
-            })
+            })*/
     }
     Logout() {
         window.localStorage.removeItem('logToken')
@@ -69,15 +70,25 @@ export default class Home extends Component {
         const { name, email, password } = this.state
         api.post('/users', { name, email, password })
             .then(res => {
-                alert('cadastrado com sucesso!')
+                //alert('cadastrado com sucesso!')
+               
             })
             .catch(err => {
                 if (err.response.status === 401) {
+                  this.setState({
+                    alertMsg:`${err.response.data}`,
+                    success:true
+                  })
                     window.localStorage.removeItem('logToken')
                     api.defaults.headers.Authorization = `Bearer `
-                    this.props.history.push("/");
+                    this.props.history.push("/signin");
                 }else{
-                    alert(err.response.data)
+                    //alert(err.response.data)
+                    this.setState({
+                      alertMsg:`${err.response.data}`,
+                      success:true
+                    })
+
                 }
 
             })   }
@@ -99,6 +110,7 @@ export default class Home extends Component {
         return ( 
              <div className={this.state.on?'container-home-closed':'container-home-open'}>
         <div className="appbar">
+         
           <AppBar position="static" style={{ height: "100%",boxShadow:"none",backgroundColor:"#fff",color:"#000" }}>
             <Toolbar
               style={{ display: "flex", justifyContent: "space-between" }}
